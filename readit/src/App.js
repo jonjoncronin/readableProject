@@ -1,7 +1,16 @@
 import React, { Component } from "react";
 import "./App.css";
+import * as CategoriesAPI from './utils/CategoriesAPI'
 
 class App extends Component {
+
+  componentDidMount () {
+    CategoriesAPI.getAll()
+    .then((categories) => {
+      console.log(categories)
+    })
+  }
+
   render() {
     return (
       <div style={{ margin: "auto", maxWidth: "900px" }}>
