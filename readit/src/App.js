@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import "./App.css";
-import * as CategoriesAPI from './utils/CategoriesAPI'
+import * as PostsAPI from './utils/PostsAPI'
 
 class App extends Component {
 
   componentDidMount () {
-    CategoriesAPI.getAll()
-    .then((categories) => {
-      console.log(categories)
+    PostsAPI.getAllCategories()
+    .then(categories => console.log(categories))
+    .then(() => {
+      PostsAPI.getAllPosts()
+      .then(posts => console.log(posts))
     })
   }
 
