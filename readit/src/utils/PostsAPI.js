@@ -158,3 +158,121 @@ export const addCommentToPost = (body, author, parentId) => {
     })
     .then(res => res.json());
 };
+
+/**
+ * Call RESTful API to add a vote for a specific post to the backend server DB.
+ * @param  {String} postID uuid of the post to vote on
+ * @param  {String} voteOption "upVote" or "downVote"
+ * @return {object} the jsonified object of the fetch response. In this case
+ * the post object for the post being voted on
+ */
+export const voteOnPost = (postID, voteOption) => {
+  fetch(`${restURL}/posts/${postID}`, {
+      method: 'POST',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ 'option':voteOption })
+    })
+    .then(res => res.json());
+};
+
+/**
+ * Call RESTful API to add a vote for a specific comment to the backend server
+ * DB.
+ * @param  {String} commentID uuid of the comment to vote on
+ * @param  {String} voteOption "upVote" or "downVote"
+ * @return {object} the jsonified object of the fetch response. In this case
+ * the comment object for the comment being voted on
+ */
+export const voteOnComment = (commentID, voteOption) => {
+  fetch(`${restURL}/comments/${commentID}`, {
+      method: 'POST',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ 'option':voteOption })
+    })
+    .then(res => res.json());
+};
+
+/**
+ * Call RESTful API to edit an existing post to the backend server DB
+ * @param  {String} postID uuid of the post
+ * @param  {String} title
+ * @param  {String} body
+ * @return {object} the jsonified object of the fetch response. In this case
+ * the post object for the post being editted
+ */
+export const editPost = (postID, title, body) => {
+  fetch(`${restURL}/posts/${postID}`, {
+      method: 'PUT',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ postID, title, body })
+    })
+    .then(res => res.json());
+};
+
+/**
+ * Call RESTful API to edit an existing comment to the backend server DB
+ * @param  {String} commentID uuid of the comment
+ * @param  {String} body
+ * @return {Object} the jsonified object of the fetch response. In this case
+ * the comment object for the comment being editted
+ */
+export const editComment = (commentID, body) => {
+  let timestamp = Date.now();
+  fetch(`${restURL}/comments/${commentID}`, {
+      method: 'PUT',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ commentID, timestamp, body })
+    })
+    .then(res => res.json());
+};
+
+/**
+ * Call RESTful API to delete an existing post on the backend server DB.
+ * NOTE - the post.deleted field is set on the object but not actually removed
+ *        from memory. Additionally each child comment to this post is also
+ *        "deleted" but the comment.deleted field being set.
+ * @param  {String} postID uuid of the post to be deleted
+ * @return {Object} the jsonified object of the fetch response. In this case
+ * the post object for the post being "deleted"
+ */
+export const deletePost = (postID) => {
+  fetch(`${restURL}/posts/${postID}`, {
+      method: 'DELETE',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json());
+};
+
+/**
+ * Call RESTful API to delete an existing comment on the backend server DB.
+ * NOTE - the comment.deleted field is set on the object but not actually
+ *        removed from memory.
+ * @param  {String} commentID uuid of the comment to be deleted
+ * @return {Object} the jsonified object of the fetch response. In this case
+ * the comment object for the comment being "deleted"
+ */
+export const deleteComment = (commentID) => {
+  fetch(`${restURL}/comments/${commentID}`, {
+      method: 'DELETE',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json());
+};
