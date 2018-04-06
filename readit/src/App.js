@@ -5,12 +5,18 @@ import * as PostsAPI from './utils/PostsAPI'
 class App extends Component {
 
   componentDidMount () {
-    PostsAPI.getAllCategories()
-    .then(categories => console.log(categories))
-    .then(() => {
-      PostsAPI.getAllPosts()
-      .then(posts => console.log(posts))
-    })
+    // PostsAPI.getCommentsForPost("8xf0y6ziyjabvozdd253nd")
+    // .then(comments => console.log(comments))
+    // PostsAPI.getPost("8xf0y6ziyjabvozdd253nd")
+    // .then(post => console.log(post))
+    // PostsAPI.getAllCategories()
+    // .then(categories => console.log(categories))
+    // .then(() => {
+    //   PostsAPI.getPostsForCategory("redux")
+    //   .then(posts => console.log(posts))
+    // })
+    // PostsAPI.getComment("8tu4bsun805n8un48ve89")
+    // .then(comment => console.log(comment))
   }
 
   render() {
