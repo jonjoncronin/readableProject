@@ -1,10 +1,14 @@
-import React, { Component } from "react";
+import React from 'react';
 import "./App.css";
 import * as PostsAPI from './utils/PostsAPI'
+import Menu from './components/Menu'
 
-class App extends Component {
+class App extends React.Component {
 
-  componentWillMount() {
+  state = {
+    myCategories: []
+  }
+  componentWillMount () {
     // PostsAPI.editPost("6ni6ok3ym7mf1p33lnez", "My Post", "My body rocks!")
     // PostsAPI.editComment("8tu4bsun805n8un48ve89", "My comment body rocks!")
     // PostsAPI.voteOnPost("8xf0y6ziyjabvozdd253nd","downVote")
@@ -18,8 +22,12 @@ class App extends Component {
     // .then(comments => console.log(comments))
     // PostsAPI.getPost("8xf0y6ziyjabvozdd253nd")
     // .then(post => console.log(post))
-    // PostsAPI.getAllCategories()
-    // .then(categories => console.log(categories))
+    PostsAPI.getAllCategories()
+    .then(categories => {
+      console.log(categories);
+      let visible = categories.map(item => (item.name))
+      this.setState({myCategories: visible});
+    })
     // .then(() => {
     //   PostsAPI.getPostsForCategory("redux")
     //   .then(posts => console.log(posts))
@@ -43,27 +51,23 @@ class App extends Component {
 
   }
 
+  selectMenu = (value) => {
+    console.log(value)
+  };
+
   render() {
+    console.log(this.state.myCategories);
     return (
       <div className='app'>
         <div class="w3-cell-row w3-blue-gray w3-margin-bottom w3-margin-top w3-padding-large">
           <h3>Readit - a blantant rip off</h3>
         </div>
-        <div class="w3-container w3-cell" style={{ width: "20%" }}>
-          <div class="w3-bar-block w3-card-2 w3-light-gray">
-            Category Menu
-            <br />
-            <a href="#" class="w3-bar-item w3-button">
-              Category 1
-            </a>
-            <a href="#" class="w3-bar-item w3-button">
-              Category 2
-            </a>
-            <a href="#" class="w3-bar-item w3-button">
-              Category 3
-            </a>
-          </div>
-        </div>
+
+        <Menu
+          title="Categories"
+          listItems={this.state.myCategories}
+          onSelectMenu={this.selectMenu} />
+
         <div
           class="w3-container w3-cell w3-bar-block"
           style={{ width: "100%" }}
