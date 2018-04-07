@@ -45,7 +45,7 @@ class App extends Component {
 
   render() {
     return (
-      <div style={{ margin: "auto", maxWidth: "900px" }}>
+      <div className='app'>
         <div class="w3-cell-row w3-blue-gray w3-margin-bottom w3-margin-top w3-padding-large">
           <h3>Readit - a blantant rip off</h3>
         </div>
