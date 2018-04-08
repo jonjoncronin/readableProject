@@ -6,7 +6,8 @@ import Menu from './components/Menu'
 class App extends React.Component {
 
   state = {
-    myCategories: []
+    myCategories: [],
+    myPosts: []
   }
   componentWillMount () {
     // PostsAPI.editPost("6ni6ok3ym7mf1p33lnez", "My Post", "My body rocks!")
@@ -24,9 +25,15 @@ class App extends React.Component {
     // .then(post => console.log(post))
     PostsAPI.getAllCategories()
     .then(categories => {
-      console.log(categories);
-      let visible = categories.map(item => (item.name))
-      this.setState({myCategories: visible});
+      // console.log(categories);
+      this.setState({myCategories: categories});
+    })
+    .then(() => {
+      PostsAPI.getAllPosts()
+      .then(posts => {
+        // console.log(posts);
+        this.setState({myPosts: posts})
+      })
     })
     // .then(() => {
     //   PostsAPI.getPostsForCategory("redux")
@@ -56,7 +63,7 @@ class App extends React.Component {
   };
 
   render() {
-    console.log(this.state.myCategories);
+    // console.log(this.state.myCategories);
     return (
       <div className='app'>
         <div class="w3-cell-row w3-blue-gray w3-margin-bottom w3-margin-top w3-padding-large">
