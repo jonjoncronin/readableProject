@@ -3,6 +3,7 @@ import "./App.css";
 import * as PostsAPI from './utils/PostsAPI'
 import Menu from './components/Menu'
 import ListPosts from './components/ListPosts'
+import PostsControl from './components/PostsControl'
 
 class App extends React.Component {
 
@@ -10,6 +11,7 @@ class App extends React.Component {
     myCategories: [],
     myPosts: []
   }
+
   componentWillMount () {
     // PostsAPI.editPost("6ni6ok3ym7mf1p33lnez", "My Post", "My body rocks!")
     // PostsAPI.editComment("8tu4bsun805n8un48ve89", "My comment body rocks!")
@@ -76,7 +78,10 @@ class App extends React.Component {
           listItems={this.state.myCategories}
           onSelectMenu={this.selectMenu} />
 
-        <ListPosts posts={this.state.myPosts} />
+        <div class="w3-container w3-cell w3-bar-block" style={{ width: "100%" }}>
+          <PostsControl />
+          <ListPosts posts={this.state.myPosts} />
+        </div>
       </div>
     );
   }
