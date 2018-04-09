@@ -1,7 +1,7 @@
 import React from 'react';
 import "./App.css";
 import * as PostsAPI from './utils/PostsAPI'
-import Menu from './components/Menu'
+// import Menu from './components/Menu'
 import ListPosts from './components/ListPosts'
 import PostsControl from './components/PostsControl'
 
@@ -73,13 +73,12 @@ class App extends React.Component {
           <h3>Readit - a blantant rip off</h3>
         </div>
 
-        <Menu
-          title="Categories"
-          listItems={this.state.myCategories}
-          onSelectMenu={this.selectMenu} />
+        <div class="w3-cell-row">
+          <PostsControl listItems={this.state.myCategories} onSelectMenu={this.selectMenu} />
 
-        <div class="w3-container w3-cell w3-bar-block" style={{ width: "100%" }}>
-          <PostsControl />
+        </div>
+
+        <div class="w3-cell-row">
           <ListPosts posts={this.state.myPosts} />
         </div>
       </div>
