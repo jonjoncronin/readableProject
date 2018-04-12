@@ -1,18 +1,19 @@
-import React from 'react';
+import React from "react";
 import "./App.css";
-import * as PostsAPI from './utils/PostsAPI'
-// import Menu from './components/Menu'
-import ListPosts from './components/ListPosts'
-import PostsControl from './components/PostsControl'
+import { Route } from "react-router-dom";
+import { Link } from "react-router-dom";
+import * as PostsAPI from "./utils/PostsAPI";
+// import Menu from './components/Menu';
+import ListPosts from "./components/ListPosts";
+import PostsControl from "./components/PostsControl";
 
 class App extends React.Component {
-
   state = {
     myCategories: [],
     myPosts: []
-  }
+  };
 
-  componentWillMount () {
+  componentWillMount() {
     // PostsAPI.editPost("6ni6ok3ym7mf1p33lnez", "My Post", "My body rocks!")
     // PostsAPI.editComment("8tu4bsun805n8un48ve89", "My comment body rocks!")
     // PostsAPI.voteOnPost("8xf0y6ziyjabvozdd253nd","downVote")
@@ -21,23 +22,22 @@ class App extends React.Component {
     // PostsAPI.deletePost("8xf0y6ziyjabvozdd253nd")
   }
 
-  componentDidMount () {
+  componentDidMount() {
     // PostsAPI.getCommentsForPost("8xf0y6ziyjabvozdd253nd")
     // .then(comments => console.log(comments))
     // PostsAPI.getPost("8xf0y6ziyjabvozdd253nd")
     // .then(post => console.log(post))
     PostsAPI.getAllCategories()
-    .then(categories => {
-      // console.log(categories);
-      this.setState({myCategories: categories});
-    })
-    .then(() => {
-      PostsAPI.getAllPosts()
-      .then(posts => {
-        // console.log(posts);
-        this.setState({myPosts: posts})
+      .then(categories => {
+        // console.log(categories);
+        this.setState({ myCategories: categories });
       })
-    })
+      .then(() => {
+        PostsAPI.getAllPosts().then(posts => {
+          // console.log(posts);
+          this.setState({ myPosts: posts });
+        });
+      });
     // .then(() => {
     //   PostsAPI.getPostsForCategory("redux")
     //   .then(posts => console.log(posts))
@@ -58,29 +58,53 @@ class App extends React.Component {
     // .then(comment => console.log(comment))
     // PostsAPI.getPost("8xf0y6ziyjabvozdd253nd")
     // .then(post => console.log(post))
-
   }
 
-  selectMenu = (value) => {
-    console.log(value)
+  selectMenu = value => {
+    console.log(value);
   };
 
   render() {
     // console.log(this.state.myCategories);
     return (
-      <div className='app'>
-        <div class="w3-cell-row w3-blue-gray w3-margin-bottom w3-margin-top w3-padding-large">
-          <h3>Readit - a blantant rip off</h3>
-        </div>
+      <div className="app">
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <div>
+              <div class="w3-cell-row w3-blue-gray w3-margin-bottom w3-margin-top w3-padding-large">
+                <h3>Readit - a blantant rip off</h3>
+              </div>
 
-        <div class="w3-cell-row">
-          <PostsControl listItems={this.state.myCategories} onSelectMenu={this.selectMenu} />
+              <div class="w3-cell-row">
+                <PostsControl
+                  listItems={this.state.myCategories}
+                  onSelectMenu={this.selectMenu}
+                />
+              </div>
 
-        </div>
+              <div class="w3-cell-row">
+                <ListPosts posts={this.state.myPosts} />
+              </div>
+            </div>
+          )}
+        />
 
-        <div class="w3-cell-row">
-          <ListPosts posts={this.state.myPosts} />
-        </div>
+        <Route
+          path="/addPost"
+          render={({ history }) => (
+            <div>
+              <div class="w3-cell-row w3-blue-gray w3-margin-bottom w3-margin-top w3-padding-large">
+                <h3>Readit - a blantant rip off</h3>
+              </div>
+
+              <div class="w3-cell-row">
+                Add post input here!!
+              </div>
+            </div>
+          )}
+        />
       </div>
     );
   }

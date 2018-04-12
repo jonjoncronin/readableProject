@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Menu from './Menu'
+import { Link } from 'react-router-dom';
+import Menu from './Menu';
 
 
 class PostsControl extends Component {
@@ -18,7 +19,7 @@ class PostsControl extends Component {
           onSelectMenu={this.props.onSelectMenu} />
 
         <div class="w3-card-4 w3-light-gray">
-          <button class="w3-button" onClick={() => (console.log("adding post"))}>Add</button>
+          <Link to="/addPost" className="w3-button">Add</Link>
           <div class="w3-dropdown-hover w3-right">
             <button class="w3-button">sort...</button>
             <div class="w3-dropdown-content w3-bar-block w3-card-4" style={{ right:0 }}>
