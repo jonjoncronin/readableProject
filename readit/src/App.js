@@ -6,6 +6,7 @@ import * as PostsAPI from "./utils/PostsAPI";
 // import Menu from './components/Menu';
 import ListPosts from "./components/ListPosts";
 import PostsControl from "./components/PostsControl";
+import PostInput from "./components/PostInput";
 
 class App extends React.Component {
   state = {
@@ -100,7 +101,7 @@ class App extends React.Component {
               </div>
 
               <div class="w3-cell-row">
-                Add post input here!!
+                <PostInput categories={this.state.myCategories} />
               </div>
             </div>
           )}
