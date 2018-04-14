@@ -123,19 +123,20 @@ export const getComment = commentID =>
  * @param {String} body
  * @param {String} author
  * @param {String} category
+ * @return {Promise} - a Promise object indicating the result of the async
+ *                     operation being made.
  */
-export const addPost = (title, body, author, category) => {
-  let id = uuidv1();
-  let timestamp = Date.now();
-  fetch(`${restURL}/posts`, {
+export const addPost = (newPost) => {
+  let fetchPromise = fetch(`${restURL}/posts`, {
       method: 'POST',
       headers: {
         ...headers,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ id, timestamp, title, body, author, category })
+      body: JSON.stringify(newPost)
     })
     .then(res => res.json());
+  return fetchPromise;
 };
 
 /**
@@ -167,7 +168,7 @@ export const addCommentToPost = (body, author, parentId) => {
  * the post object for the post being voted on
  */
 export const voteOnPost = (postID, voteOption) => {
-  fetch(`${restURL}/posts/${postID}`, {
+  let fetchPromise = fetch(`${restURL}/posts/${postID}`, {
       method: 'POST',
       headers: {
         ...headers,
@@ -176,6 +177,7 @@ export const voteOnPost = (postID, voteOption) => {
       body: JSON.stringify({ 'option':voteOption })
     })
     .then(res => res.json());
+    return fetchPromise;
 };
 
 /**

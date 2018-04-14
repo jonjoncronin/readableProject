@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import uuidv1 from "uuid"
 import { Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 import * as PostsAPI from "./utils/PostsAPI";
@@ -66,49 +67,52 @@ class App extends React.Component {
     // .then(comment => console.log(comment))
   }
 
-  selectMenu = value => {
-    console.log(value);
-  };
-
   addUserPost = (userInputs) => {
     let { title, author, category, body } = userInputs;
-    PostsAPI.addPost(title, body, author, category);
+    let id = uuidv1();
+    let timestamp = Date.now();
+    let newPost = {id, timestamp, title, body, author, category};
+    console.log("newPost before sent to DB");
+    console.log(newPost);
+    PostsAPI.addPost(newPost)
+    .then(() => {
+      console.log("post added to backend DB")
+      PostsAPI.getAllPosts()
+      .then((posts) => {
+        this.setState({ myPosts: posts });
+      });
+    });
   };
 
   voteOnPost = (postID, vote) => {
-    let updatedPosts = this.state.myPosts;
-    let somePostIndex = updatedPosts.findIndex(post => post.id === postID);
-    if(somePostIndex >= 0) {
-      if(vote === "upVote") {
-        updatedPosts[somePostIndex].voteScore++;
-      }
-      else {
-        updatedPosts[somePostIndex].voteScore--;
-      }
-    }
-    this.setState = ({myPosts: updatedPosts})
-    PostsAPI.voteOnPost(postID,vote);
+    PostsAPI.voteOnPost(postID,vote)
+    .then(() => {
+      console.log("vote added to backend DB");
+      PostsAPI.getAllPosts()
+      .then((posts) => {
+        this.setState({ myPosts: posts });
+      });
+    });
   }
 
   render() {
     return (
       <div className="app">
-        <Route
-          exact
+        <Route exact
           path="/"
           render={() => (
             <div>
               <div class="w3-cell-row w3-blue-gray w3-margin-bottom w3-margin-top w3-padding-large">
                 <h3>Readit - a blantant rip off</h3>
               </div>
-
-              <div class="w3-cell-row">
-                <PostsControl
-                  listItems={this.state.myCategories}
-                  onSelectMenu={this.selectMenu}
-                />
-              </div>
-
+              {
+                // <div class="w3-cell-row">
+                //   <PostsControl
+                //     listItems={this.state.myCategories}
+                //     onSelectMenu={this.selectMenu}
+                //   />
+                // </div>
+              }
               <div class="w3-cell-row">
                 <ListPosts
                   posts={this.state.myPosts}
@@ -137,6 +141,7 @@ class App extends React.Component {
             </div>
           )}
         />
+
       </div>
     );
   }
