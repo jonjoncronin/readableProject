@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
+
 class PostTease extends Component {
   render() {
     console.log(this.props);
@@ -12,25 +14,38 @@ class PostTease extends Component {
             Comments: {post.commentCount}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Votes: {post.voteScore}
           </div>
         </div>
-        <div className="w3-container">
-          {post.body}
-        </div>
         <div className="w3-container w3-win8-olive">
           <button
             id="upVote"
             onClick={(event) => {
-            handleVoteOnPost(post.id, event.target.id)
+            handleVoteOnPost(post.id, event.target.id);
             }}
-            className="w3-button w3-left">
+            className="w3-button">
             upVote
           </button>
           <button
             id="downVote"
             onClick={(event) => {
-            handleVoteOnPost(post.id, event.target.id)
+            handleVoteOnPost(post.id, event.target.id);
             }}
-            className="w3-button w3-right">
+            className="w3-button">
             downVote
+          </button>
+          <button
+            id="editPost"
+            onClick={(event) => {
+              console.log("handle editting of post");
+            }}
+            className="w3-button">
+            edit
+          </button>
+          <button
+            id="deletePost"
+            onClick={(event) => {
+              console.log("handle deleting of post");
+            }}
+            className="w3-button">
+            delete
           </button>
         </div>
       </div>
