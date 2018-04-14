@@ -14,42 +14,43 @@ class App extends React.Component {
     myPosts: []
   };
 
-  addUserPost = (userInputs) => {
-    let { title, author, category, body } = userInputs;
-    PostsAPI.addPost(title, body, author, category);
-  };
-
-  componentWillMount() {
-    // PostsAPI.editPost("6ni6ok3ym7mf1p33lnez", "My Post", "My body rocks!")
-    // PostsAPI.editComment("8tu4bsun805n8un48ve89", "My comment body rocks!")
-    // PostsAPI.voteOnPost("8xf0y6ziyjabvozdd253nd","downVote")
-    // PostsAPI.voteOnComment("8tu4bsun805n8un48ve89","downVote")
-    // PostsAPI.deleteComment("8tu4bsun805n8un48ve89")
-    // PostsAPI.deletePost("8xf0y6ziyjabvozdd253nd")
-  }
-
   componentDidMount() {
+    PostsAPI.getAllCategories()
+    .then(categories => {
+      // console.log(categories);
+      this.setState({ myCategories: categories });
+    })
+    .then(() => {
+      PostsAPI.getAllPosts().then(posts => {
+      // console.log(posts);
+      this.setState({ myPosts: posts });
+      });
+    });
+
+    // PostsAPI.editPost("6ni6ok3ym7mf1p33lnez", "My Post", "My body rocks!")
+    //
+    // PostsAPI.editComment("8tu4bsun805n8un48ve89", "My comment body rocks!")
+    //
+    // PostsAPI.voteOnPost("8xf0y6ziyjabvozdd253nd","downVote")
+    //
+    // PostsAPI.voteOnComment("8tu4bsun805n8un48ve89","downVote")
+    //
+    // PostsAPI.deleteComment("8tu4bsun805n8un48ve89")
+    //
+    // PostsAPI.deletePost("8xf0y6ziyjabvozdd253nd")
+    //
     // PostsAPI.getCommentsForPost("8xf0y6ziyjabvozdd253nd")
     // .then(comments => console.log(comments))
+    //
     // PostsAPI.getPost("8xf0y6ziyjabvozdd253nd")
     // .then(post => console.log(post))
-    PostsAPI.getAllCategories()
-      .then(categories => {
-        // console.log(categories);
-        this.setState({ myCategories: categories });
-      })
-      .then(() => {
-        PostsAPI.getAllPosts().then(posts => {
-          // console.log(posts);
-          this.setState({ myPosts: posts });
-        });
-      });
-    // .then(() => {
-    //   PostsAPI.getPostsForCategory("redux")
-    //   .then(posts => console.log(posts))
-    // })
+
+    // PostsAPI.getPostsForCategory("redux")
+    // .then(posts => console.log(posts))
+    //
     // PostsAPI.getAllPosts()
     // .then(posts => console.log(posts))
+    //
     // PostsAPI.getAllPosts()
     // .then((posts) => {
     //   posts.forEach((post) => {
@@ -60,16 +61,34 @@ class App extends React.Component {
     //     })
     //   })
     // })
+    //
     // PostsAPI.getComment("8tu4bsun805n8un48ve89")
     // .then(comment => console.log(comment))
-    // PostsAPI.getPost("8xf0y6ziyjabvozdd253nd")
-    // .then(post => console.log(post))
   }
 
   selectMenu = value => {
     console.log(value);
   };
 
+  addUserPost = (userInputs) => {
+    let { title, author, category, body } = userInputs;
+    PostsAPI.addPost(title, body, author, category);
+  };
+
+  voteOnPost = (postID, vote) => {
+    let updatedPosts = this.state.myPosts;
+    let somePostIndex = updatedPosts.findIndex(post => post.id === postID);
+    if(somePostIndex >= 0) {
+      if(vote === "upVote") {
+        updatedPosts[somePostIndex].voteScore++;
+      }
+      else {
+        updatedPosts[somePostIndex].voteScore--;
+      }
+    }
+    this.setState = ({myPosts: updatedPosts})
+    PostsAPI.voteOnPost(postID,vote);
+  }
 
   render() {
     return (
@@ -91,7 +110,9 @@ class App extends React.Component {
               </div>
 
               <div class="w3-cell-row">
-                <ListPosts posts={this.state.myPosts} />
+                <ListPosts
+                  posts={this.state.myPosts}
+                  handleVoteOnPost={this.voteOnPost} />
               </div>
             </div>
           )}

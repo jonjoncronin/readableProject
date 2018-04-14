@@ -4,13 +4,13 @@ import PostTease from './PostTease'
 class ListPosts extends Component {
   render() {
     console.log(this.props);
-    const posts = this.props.posts;
+    const { posts, handleVoteOnPost } = this.props;
 
     return (
       <div>
         {
           posts.map(post => (
-            <PostTease key={post.id} post={post} />
+            <PostTease key={post.id} post={post} handleVoteOnPost={handleVoteOnPost} />
           ))
         }
       </div>
