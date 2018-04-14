@@ -95,6 +95,17 @@ class App extends React.Component {
     });
   }
 
+  deletePost = (postID) => {
+    PostsAPI.deletePost(postID)
+    .then(() => {
+      console.log("post removed from backend DB");
+      PostsAPI.getAllPosts()
+      .then((posts) => {
+        this.setState({ myPosts: posts});
+      });
+    });
+  };
+
   render() {
     return (
       <div className="app">
@@ -116,7 +127,8 @@ class App extends React.Component {
               <div class="w3-cell-row">
                 <ListPosts
                   posts={this.state.myPosts}
-                  handleVoteOnPost={this.voteOnPost} />
+                  handleVoteOnPost={this.voteOnPost}
+                  handlePostDelete={this.deletePost} />
               </div>
             </div>
           )}

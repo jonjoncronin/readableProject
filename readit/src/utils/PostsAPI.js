@@ -250,7 +250,7 @@ export const editComment = (commentID, body) => {
  * the post object for the post being "deleted"
  */
 export const deletePost = (postID) => {
-  fetch(`${restURL}/posts/${postID}`, {
+  let fetchPromise = fetch(`${restURL}/posts/${postID}`, {
       method: 'DELETE',
       headers: {
         ...headers,
@@ -258,6 +258,7 @@ export const deletePost = (postID) => {
       }
     })
     .then(res => res.json());
+    return fetchPromise;
 };
 
 /**

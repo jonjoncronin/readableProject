@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 class PostTease extends Component {
   render() {
     console.log(this.props);
-    const { post, handleVoteOnPost } = this.props;
+    const { post, handleVoteOnPost, handlePostDelete } = this.props;
 
     return (
       <div className="w3-card-2 w3-white" style={{ marginBottom: "8px" }}>
@@ -43,6 +43,7 @@ class PostTease extends Component {
             id="deletePost"
             onClick={(event) => {
               console.log("handle deleting of post");
+              handlePostDelete(post.id);
             }}
             className="w3-button">
             delete
