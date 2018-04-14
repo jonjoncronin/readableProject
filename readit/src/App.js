@@ -8,6 +8,7 @@ import * as PostsAPI from "./utils/PostsAPI";
 import ListPosts from "./components/ListPosts";
 import PostsControl from "./components/PostsControl";
 import PostInput from "./components/PostInput";
+import PostDetail from "./components/PostDetail";
 
 class App extends React.Component {
   state = {
@@ -154,6 +155,14 @@ class App extends React.Component {
           )}
         />
 
+        <Route
+          path="/:category/:postID"
+          render={({history,match}) => (
+            <div>
+              <PostDetail postID={match.params.postID} />
+            </div>
+          )}
+        />
       </div>
     );
   }
