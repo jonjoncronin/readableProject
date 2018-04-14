@@ -2,10 +2,27 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 class PostInput extends Component {
-
-  onSelectMenu = (name) => {
-    console.log(name);
+  state = {
+    title: '',
+    author: '',
+    category: '',
+    body: ''
   };
+
+  somePost = {title: "dummy title", author: "dummy author", category: "react", body: "dummy body"};
+
+  handleInputChanges = (event) => {
+    this.setState({[event.target.name]: event.target.value})
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    if(this.props.onAddPost) {
+      this.props.onAddPost(this.state);
+    }
+
+  }
+
   render() {
     console.log(this.props);
     let selectedCategory;
@@ -16,21 +33,38 @@ class PostInput extends Component {
           <h2>Add new post ...</h2>
         </div>
 
-        <form className="w3-container w3-padding">
+        <form
+          onSubmit={this.handleSubmit}
+          className="w3-container w3-padding">
 
           <label>Title</label>
-          <input className="w3-input" type="text" placeholder="Title for the post..."/>
+          <input
+            name="title"
+            className="w3-input"
+            type="text"
+            placeholder="Title for the post..."
+            onChange={this.handleInputChanges} />
 
           <label>Author</label>
-          <input className="w3-input" type="text" placeholder="Your name..."/>
+          <input
+            name="author"
+            className="w3-input"
+            type="text"
+            placeholder="Your name..."
+            onChange={this.handleInputChanges} />
 
           <label>Category</label>
-          <select className="w3-input">
+          <select
+            name="category"
+            className="w3-input"
+            defaultValue="choose"
+            onChange={this.handleInputChanges} >
+            <option key="choose" value="choose" disabled>Choose one...</option>
+
             {this.props.categories.map(item => (
                 <option
                   key={item.name}
                   value={item.name}
-                  onClick={event => this.onSelectMenu(item.name)}
                 >
                   {item.name}
                 </option>
@@ -38,9 +72,13 @@ class PostInput extends Component {
           </select>
 
           <label>Post</label>
-          <textarea className="w3-input" placeholder="Write something..." />
+          <textarea
+            name="body"
+            className="w3-input"
+            placeholder="Write something..."
+            onChange={this.handleInputChanges} />
 
-          <input className="w3-button" type="submit" value="Submit" />
+          <button className="w3-button">Submit</button>
           <Link to="/" className="w3-button w3-right">Cancel</Link>
         </form>
 

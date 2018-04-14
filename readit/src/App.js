@@ -14,6 +14,11 @@ class App extends React.Component {
     myPosts: []
   };
 
+  addUserPost = (userInputs) => {
+    let { title, author, category, body } = userInputs;
+    PostsAPI.addPost(title, body, author, category);
+  };
+
   componentWillMount() {
     // PostsAPI.editPost("6ni6ok3ym7mf1p33lnez", "My Post", "My body rocks!")
     // PostsAPI.editComment("8tu4bsun805n8un48ve89", "My comment body rocks!")
@@ -65,8 +70,8 @@ class App extends React.Component {
     console.log(value);
   };
 
+
   render() {
-    // console.log(this.state.myCategories);
     return (
       <div className="app">
         <Route
@@ -101,7 +106,12 @@ class App extends React.Component {
               </div>
 
               <div class="w3-cell-row">
-                <PostInput categories={this.state.myCategories} />
+                <PostInput
+                  onAddPost={(post) => {
+                    this.addUserPost(post);
+                    history.push('/');
+                  }}
+                  categories={this.state.myCategories} />
               </div>
             </div>
           )}
