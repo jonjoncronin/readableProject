@@ -31,14 +31,11 @@ class PostTease extends Component {
             className="w3-button">
             downVote
           </button>
-          <button
-            id="editPost"
-            onClick={(event) => {
-              console.log("handle editting of post");
-            }}
+          <Link
+            to={"/" + post.category + "/" + post.id + "/edit"}
             className="w3-button">
             edit
-          </button>
+          </Link>
           <button
             id="deletePost"
             onClick={(event) => {

@@ -9,6 +9,7 @@ import ListPosts from "./components/ListPosts";
 import PostsControl from "./components/PostsControl";
 import PostInput from "./components/PostInput";
 import PostDetail from "./components/PostDetail";
+import PostEdit from "./components/PostEdit";
 
 class App extends React.Component {
   state = {
@@ -81,6 +82,12 @@ class App extends React.Component {
         this.setState({ myPosts: posts });
       });
     });
+  };
+
+  editUserPost = (userInputs, postID) => {
+    let {title, author, category, body } = userInputs;
+    console.log("editting post " + postID)
+    console.log(title + " " + author + " " + category + " " + body);
   };
 
   voteOnPost = (postID, vote) => {
@@ -162,6 +169,25 @@ class App extends React.Component {
             )}
           />
 
+          <Route
+            exact
+            path="/:category/:postID/edit"
+            render= {({ history,match }) => (
+              <div>
+                <Header />
+                <div className="w3-cell-row">
+                  <PostEdit
+                    post={this.state.myPosts.find(post => post.id === match.params.postID)}
+                    onEditPost={(post,postID) => {
+                      this.editUserPost(post, postID);
+                      history.push("/");
+                    }}
+                    categories={this.state.myCategories}
+                  />
+                </div>
+              </div>
+            )}
+          />
           <Route
             exact
             path="/:category"
