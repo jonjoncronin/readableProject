@@ -1,26 +1,43 @@
 import React, { Component } from "react";
+import PostControl from "./PostControl";
 
 class PostDetail extends Component {
 
   render() {
-    const { post } = this.props;
+    const { post, handleVoteOnPost, handlePostDelete } = this.props;
     return (
-      <div className="w3-card-4 w3-win8-mauve w3-padding">
+      <div>
       {
         post ? (
-          <div>
-            <div className="w3-container">
-              <h3>{post.title}</h3>
+          <div className="w3-card-2 w3-white w3-padding">
+            <div className="w3-container w3-win8-steel">
+              <div className="w3-container w3-large">
+                {post.title}
+              </div>
+              <div className="w3-container w3-small">
+                Date: {new Date(post.timestamp).toDateString()}
+              </div>
+              <div className="w3-container w3-small">
+                Author: {post.author}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Comments: {post.commentCount}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Votes: {post.voteScore}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </div>
             </div>
-            <div className="w3-container w3-white">
-              {post.body}
+            <div className="w3-container w3-padding w3-light-grey">
+              <div className="w3-container">
+                <label>Post:</label>
+                <div>
+                  {post.body}
+                </div>
+              </div>
             </div>
-            <div className="w3-container w3-win8-olive">
-              controls
-            </div>
+            <PostControl
+              post={post}
+              handleVoteOnPost={handleVoteOnPost}
+              handlePostDelete={handlePostDelete} />
           </div>
         ) : (
-          <div>
+          <div className="w3-card-2 w3-black">
             No post found
           </div>
         )
