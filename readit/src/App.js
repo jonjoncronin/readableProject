@@ -118,12 +118,12 @@ class App extends React.Component {
                 <h3>Readit - a blantant rip off</h3>
               </div>
               {
-                // <div class="w3-cell-row">
-                //   <PostsControl
-                //     listItems={this.state.myCategories}
-                //     onSelectMenu={this.selectMenu}
-                //   />
-                // </div>
+                <div class="w3-cell-row">
+                  <PostsControl
+                    listItems={this.state.myCategories}
+                    onSelectMenu={this.selectMenu}
+                  />
+                </div>
               }
               <div class="w3-cell-row">
                 <ListPosts
@@ -156,15 +156,17 @@ class App extends React.Component {
         />
 
         <Route
+          exact
           path="/:category/:postID"
           render={({history,match}) => (
             <div>
-              <PostDetail postID={match.params.postID} />
+              <PostDetail post={this.state.myPosts.find(post => (post.id === match.params.postID))} />
             </div>
           )}
         />
 
         <Route
+          exact
           path="/:category"
           render={({history,match}) => (
               <div>
@@ -172,8 +174,15 @@ class App extends React.Component {
                   <h3>Readit - a blantant rip off</h3>
                 </div>
                 <div class="w3-cell-row">
+                  <PostsControl
+                    listItems={this.state.myCategories}
+                    onSelectMenu={this.selectMenu}
+                  />
+                </div>
+                <div class="w3-cell-row">
                   <ListPosts
                     posts={this.state.myPosts.filter(post => (post.category === match.params.category))}
+                    category={match.params.category}
                     handleVoteOnPost={this.voteOnPost}
                     handlePostDelete={this.deletePost} />
                 </div>

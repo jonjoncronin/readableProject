@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Menu extends Component {
   render() {
@@ -10,18 +11,18 @@ class Menu extends Component {
           Categories -{" "}
           <span class="w3-tiny w3-opacity">{listItems.length} total</span>
         </label>
-        <button class="w3-bar-item w3-button" onClick={event => onSelectMenu("all")}>All</button>
+        <Link to="/" class="w3-bar-item w3-button">All</Link>
         <div class="w3-dropdown-hover">
           <button class="w3-button">choose...</button>
           <div class="w3-dropdown-content w3-bar-block w3-card-4">
             {listItems.map(item => (
-              <button
+              <Link
                 key={item.name}
                 class="w3-bar-item w3-button"
-                onClick={event => onSelectMenu(item.name)}
+                to={"/" + item.name}
               >
                 {item.name}
-              </button>
+              </Link>
             ))}
           </div>
         </div>
