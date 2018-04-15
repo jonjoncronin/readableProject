@@ -209,7 +209,7 @@ export const voteOnComment = (commentID, voteOption) => {
  * the post object for the post being editted
  */
 export const editPost = (postID, title, body) => {
-  fetch(`${restURL}/posts/${postID}`, {
+  let fetchPromise = fetch(`${restURL}/posts/${postID}`, {
       method: 'PUT',
       headers: {
         ...headers,
@@ -218,6 +218,7 @@ export const editPost = (postID, title, body) => {
       body: JSON.stringify({ postID, title, body })
     })
     .then(res => res.json());
+    return fetchPromise;
 };
 
 /**

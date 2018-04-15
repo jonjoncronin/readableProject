@@ -88,6 +88,13 @@ class App extends React.Component {
     let {title, author, category, body } = userInputs;
     console.log("editting post " + postID)
     console.log(title + " " + author + " " + category + " " + body);
+    PostsAPI.editPost(postID, title, body)
+    .then(() => {
+      console.log("post edit made to backend DB");
+      PostsAPI.getAllPosts().then(posts => {
+        this.setState({ myPosts: posts });
+      });
+    });
   };
 
   voteOnPost = (postID, vote) => {
