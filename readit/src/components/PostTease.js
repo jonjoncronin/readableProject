@@ -8,9 +8,11 @@ class PostTease extends Component {
     return (
       <div className="w3-card-2 w3-white" style={{ marginBottom: "8px" }}>
         <div className="w3-container w3-win8-steel">
-          <Link to={"/" + post.category + "/" + post.id}><h5>{post.title}</h5></Link>
+          <div className="w3-container w3-padding-small">
+            <h6><Link to={"/" + post.category + "/" + post.id}>{post.title}</Link></h6>
+          </div>
           <div className="w3-container w3-small">
-            Comments: {post.commentCount}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Votes: {post.voteScore}
+            Author: {post.author}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comments: {post.commentCount}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Votes: {post.voteScore}
           </div>
         </div>
         <div className="w3-container w3-win8-olive">
