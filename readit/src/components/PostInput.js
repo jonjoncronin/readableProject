@@ -1,22 +1,17 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import serializeForm from 'form-serialize'
 
 class PostInput extends Component {
-  state = {
-    title: '',
-    author: '',
-    category: '',
-    body: ''
-  };
-
-  handleInputChanges = (event) => {
-    this.setState({[event.target.name]: event.target.value})
-  };
 
   handleSubmit = (event) => {
     event.preventDefault();
-    if(this.props.onAddPost) {
-      this.props.onAddPost(this.state);
+    const onAddPost = this.props.onAddPost;
+    const userInputs = serializeForm(event.target, { hash:true });
+    console.log("submittingAdd");
+    console.log(userInputs);
+    if(onAddPost) {
+      onAddPost(userInputs);
     }
   }
 
@@ -37,23 +32,20 @@ class PostInput extends Component {
             name="title"
             className="w3-input"
             type="text"
-            placeholder="Title for the post..."
-            onChange={this.handleInputChanges} />
+            placeholder="Title for the post..." />
 
           <label>Author</label>
           <input
             name="author"
             className="w3-input"
             type="text"
-            placeholder="Your name..."
-            onChange={this.handleInputChanges} />
+            placeholder="Your name..." />
 
           <label>Category</label>
           <select
             name="category"
             className="w3-input"
-            defaultValue="choose"
-            onChange={this.handleInputChanges} >
+            defaultValue="choose">
             <option key="choose" value="choose" disabled>Choose one...</option>
 
             {this.props.categories.map(item => (
@@ -70,8 +62,7 @@ class PostInput extends Component {
           <textarea
             name="body"
             className="w3-input"
-            placeholder="Write something..."
-            onChange={this.handleInputChanges} />
+            placeholder="Write something..." />
 
           <button className="w3-button">Submit</button>
           <Link to="/" className="w3-button w3-right">Cancel</Link>
