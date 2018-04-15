@@ -163,6 +163,23 @@ class App extends React.Component {
             </div>
           )}
         />
+
+        <Route
+          path="/:category"
+          render={({history,match}) => (
+              <div>
+                <div class="w3-cell-row w3-blue-gray w3-margin-bottom w3-margin-top w3-padding-large">
+                  <h3>Readit - a blantant rip off</h3>
+                </div>
+                <div class="w3-cell-row">
+                  <ListPosts
+                    posts={this.state.myPosts.filter(post => (post.category === match.params.category))}
+                    handleVoteOnPost={this.voteOnPost}
+                    handlePostDelete={this.deletePost} />
+                </div>
+              </div>
+          )}
+        />
       </div>
     );
   }
