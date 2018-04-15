@@ -21,7 +21,6 @@ class PostInput extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className="w3-card-4 w3-win8-mauve w3-padding">
 

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 class Menu extends Component {
   render() {
-    console.log(this.props);
     const { listItems } = this.props;
     return (
       <div className="w3-card-4 w3-bar w3-black">

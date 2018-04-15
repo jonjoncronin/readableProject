@@ -18,7 +18,6 @@ class PostEdit extends Component {
   }
 
   render() {
-    console.log(this.props);
     const { post, onEditPost, categories } = this.props;
     return (
       <div className="w3-card-4 w3-win8-mauve w3-padding">
@@ -47,7 +46,7 @@ class PostEdit extends Component {
             type="text"
             placeholder={post ? post.author : ''}
             value={post ? post.author : ''}
-            readonly
+            readOnly
             disabled />
 
           <label>Category</label>
@@ -57,7 +56,7 @@ class PostEdit extends Component {
             defaultValue={post ? post.category : 'choose'} >
             <option key="choose" value="choose" disabled>Choose one...</option>
 
-            {this.props.categories.map(item => (
+            {categories.map(item => (
                 <option
                   key={item.name}
                   value={item.name}

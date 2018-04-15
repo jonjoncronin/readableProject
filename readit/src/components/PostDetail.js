@@ -3,8 +3,6 @@ import React, { Component } from "react";
 class PostDetail extends Component {
 
   render() {
-    console.log("in postDetail");
-    console.log(this.props);
     const { post } = this.props;
     return (
       <div className="w3-card-4 w3-win8-mauve w3-padding">

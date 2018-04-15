@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 class PostTease extends Component {
   render() {
-    console.log(this.props);
     const { post, handleVoteOnPost, handlePostDelete } = this.props;
 
     return (

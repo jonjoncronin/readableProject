@@ -3,7 +3,6 @@ import PostTease from './PostTease'
 
 class ListPosts extends Component {
   render() {
-    console.log(this.props);
     const { posts, category, handleVoteOnPost, handlePostDelete } = this.props;
 
     return (
