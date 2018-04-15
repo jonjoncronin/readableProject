@@ -4,21 +4,21 @@ import { Link } from "react-router-dom";
 class Menu extends Component {
   render() {
     console.log(this.props);
-    const { listItems, onSelectMenu } = this.props;
+    const { listItems } = this.props;
     return (
-      <div class="w3-card-4 w3-bar w3-black">
-        <label class="w3-bar-item">
+      <div className="w3-card-4 w3-bar w3-black">
+        <label className="w3-bar-item">
           Categories -{" "}
-          <span class="w3-tiny w3-opacity">{listItems.length} total</span>
+          <span className="w3-tiny w3-opacity">{listItems.length} total</span>
         </label>
-        <Link to="/" class="w3-bar-item w3-button">All</Link>
-        <div class="w3-dropdown-hover">
-          <button class="w3-button">choose...</button>
-          <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <Link to="/" className="w3-bar-item w3-button">All</Link>
+        <div className="w3-dropdown-hover">
+          <button className="w3-button">choose...</button>
+          <div className="w3-dropdown-content w3-bar-block w3-card-4">
             {listItems.map(item => (
               <Link
                 key={item.name}
-                class="w3-bar-item w3-button"
+                className="w3-bar-item w3-button"
                 to={"/" + item.name}
               >
                 {item.name}

@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import * as PostsAPI from "../utils/PostsAPI";
 
 class PostDetail extends Component {
 

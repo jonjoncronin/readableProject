@@ -9,8 +9,6 @@ class PostInput extends Component {
     body: ''
   };
 
-  somePost = {title: "dummy title", author: "dummy author", category: "react", body: "dummy body"};
-
   handleInputChanges = (event) => {
     this.setState({[event.target.name]: event.target.value})
   };
@@ -20,12 +18,10 @@ class PostInput extends Component {
     if(this.props.onAddPost) {
       this.props.onAddPost(this.state);
     }
-
   }
 
   render() {
     console.log(this.props);
-    let selectedCategory;
     return (
       <div className="w3-card-4 w3-win8-mauve w3-padding">
 

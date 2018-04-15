@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import uuidv1 from "uuid";
-import { Route, Link, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import * as PostsAPI from "./utils/PostsAPI";
 // import Menu from './components/Menu';
 import Header from "./components/Header";
