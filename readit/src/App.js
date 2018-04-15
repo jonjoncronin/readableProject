@@ -7,7 +7,7 @@ import sortBy from 'sort-by'
 import * as PostsAPI from "./utils/PostsAPI";
 import Header from "./components/Header";
 import ListPosts from "./components/ListPosts";
-import PostsControl from "./components/PostsControl";
+import PostListsControl from "./components/PostListsControl";
 import PostInput from "./components/PostInput";
 import PostDetail from "./components/PostDetail";
 import PostEdit from "./components/PostEdit";
@@ -133,7 +133,7 @@ class App extends React.Component {
               <div>
                 <Header />
                 <div className="w3-cell-row">
-                  <PostsControl
+                  <PostListsControl
                     listItems={this.state.myCategories}
                     onSelectMenu={this.selectMenu}
                     onSortPosts={this.sortPosts}
@@ -210,7 +210,7 @@ class App extends React.Component {
               <div>
                 <Header />
                 <div className="w3-cell-row">
-                  <PostsControl
+                  <PostListsControl
                     listItems={this.state.myCategories}
                     onSelectMenu={this.selectMenu}
                     onSortPosts={this.sortPosts}

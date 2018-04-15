@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Menu from './Menu';
 
 
-class PostsControl extends Component {
+class PostListsControl extends Component {
   render() {
     const listItems = this.props.listItems;
     const onSortPosts = this.props.onSortPosts;
@@ -27,4 +27,4 @@ class PostsControl extends Component {
   }
 }
 
-export default PostsControl;
+export default PostListsControl;
