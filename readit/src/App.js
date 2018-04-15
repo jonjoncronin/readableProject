@@ -4,6 +4,7 @@ import uuidv1 from "uuid";
 import { Route, Link, Switch } from "react-router-dom";
 import * as PostsAPI from "./utils/PostsAPI";
 // import Menu from './components/Menu';
+import Header from "./components/Header";
 import ListPosts from "./components/ListPosts";
 import PostsControl from "./components/PostsControl";
 import PostInput from "./components/PostInput";
@@ -109,17 +110,13 @@ class App extends React.Component {
             path="/"
             render={() => (
               <div>
-                <div className="w3-cell-row w3-blue-gray w3-margin-bottom w3-margin-top w3-padding-large">
-                  <h3>Readit - a blantant rip off</h3>
+                <Header />
+                <div className="w3-cell-row">
+                  <PostsControl
+                    listItems={this.state.myCategories}
+                    onSelectMenu={this.selectMenu}
+                  />
                 </div>
-                {
-                  <div className="w3-cell-row">
-                    <PostsControl
-                      listItems={this.state.myCategories}
-                      onSelectMenu={this.selectMenu}
-                    />
-                  </div>
-                }
                 <div className="w3-cell-row">
                   <ListPosts
                     posts={this.state.myPosts}
@@ -136,10 +133,7 @@ class App extends React.Component {
             path="/addPost"
             render={({ history }) => (
               <div>
-                <div className="w3-cell-row w3-blue-gray w3-margin-bottom w3-margin-top w3-padding-large">
-                  <h3>Readit - a blantant rip off</h3>
-                </div>
-
+                <Header />
                 <div className="w3-cell-row">
                   <PostInput
                     onAddPost={post => {
@@ -158,6 +152,7 @@ class App extends React.Component {
             path="/:category/:postID"
             render={({ history, match }) => (
               <div>
+                <Header />
                 <PostDetail
                   post={this.state.myPosts.find(
                     post => post.id === match.params.postID
@@ -172,9 +167,7 @@ class App extends React.Component {
             path="/:category"
             render={({ history, match }) => (
               <div>
-                <div className="w3-cell-row w3-blue-gray w3-margin-bottom w3-margin-top w3-padding-large">
-                  <h3>Readit - a blantant rip off</h3>
-                </div>
+                <Header />
                 <div className="w3-cell-row">
                   <PostsControl
                     listItems={this.state.myCategories}
