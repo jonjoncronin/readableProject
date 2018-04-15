@@ -2,8 +2,9 @@ import React from "react";
 import "./App.css";
 import uuidv1 from "uuid";
 import { Route, Switch } from "react-router-dom";
+import sortBy from 'sort-by'
+
 import * as PostsAPI from "./utils/PostsAPI";
-// import Menu from './components/Menu';
 import Header from "./components/Header";
 import ListPosts from "./components/ListPosts";
 import PostsControl from "./components/PostsControl";
@@ -115,6 +116,12 @@ class App extends React.Component {
     });
   };
 
+  sortPosts = type => {
+    let thePosts = this.state.myPosts;
+    thePosts.sort(sortBy(type));
+    this.setState({ myPosts: thePosts });
+  }
+
   render() {
     return (
       <div className="app">
@@ -129,6 +136,7 @@ class App extends React.Component {
                   <PostsControl
                     listItems={this.state.myCategories}
                     onSelectMenu={this.selectMenu}
+                    onSortPosts={this.sortPosts}
                   />
                 </div>
                 <div className="w3-cell-row">
@@ -205,6 +213,7 @@ class App extends React.Component {
                   <PostsControl
                     listItems={this.state.myCategories}
                     onSelectMenu={this.selectMenu}
+                    onSortPosts={this.sortPosts}
                   />
                 </div>
                 <div className="w3-cell-row">

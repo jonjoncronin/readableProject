@@ -4,12 +4,9 @@ import Menu from './Menu';
 
 
 class PostsControl extends Component {
-
-  handleSortSelect = (event) => {
-    console.log(event.target.value);
-  };
-
   render() {
+    const listItems = this.props.listItems;
+    const onSortPosts = this.props.onSortPosts;
     return (
       <div className="w3-card-4 w3-win8-mauve w3-padding w3-margin-bottom">
         <Menu
@@ -20,8 +17,8 @@ class PostsControl extends Component {
           <div className="w3-dropdown-hover w3-right">
             <button className="w3-button">sort...</button>
             <div className="w3-dropdown-content w3-bar-block w3-card-4" style={{ right:0 }}>
-              <button className="w3-bar-item w3-button" value="byDate" onClick={(event) => this.handleSortSelect(event)}>date posted</button>
-              <button className="w3-bar-item w3-button" value="byVote" onClick={(event) => this.handleSortSelect(event)}>vote count</button>
+              <button className="w3-bar-item w3-button" value="timestamp" onClick={(event) => onSortPosts(event.target.value)}>date posted</button>
+              <button className="w3-bar-item w3-button" value="voteScore" onClick={(event) => onSortPosts(event.target.value)}>vote count</button>
             </div>
           </div>
         </div>
