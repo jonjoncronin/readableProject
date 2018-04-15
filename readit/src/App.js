@@ -1,8 +1,7 @@
 import React from "react";
 import "./App.css";
-import uuidv1 from "uuid"
-import { Route } from "react-router-dom";
-import { Link } from "react-router-dom";
+import uuidv1 from "uuid";
+import { Route, Link, Switch } from "react-router-dom";
 import * as PostsAPI from "./utils/PostsAPI";
 // import Menu from './components/Menu';
 import ListPosts from "./components/ListPosts";
@@ -18,16 +17,16 @@ class App extends React.Component {
 
   componentDidMount() {
     PostsAPI.getAllCategories()
-    .then(categories => {
-      // console.log(categories);
-      this.setState({ myCategories: categories });
-    })
-    .then(() => {
-      PostsAPI.getAllPosts().then(posts => {
-      // console.log(posts);
-      this.setState({ myPosts: posts });
+      .then(categories => {
+        // console.log(categories);
+        this.setState({ myCategories: categories });
+      })
+      .then(() => {
+        PostsAPI.getAllPosts().then(posts => {
+          // console.log(posts);
+          this.setState({ myPosts: posts });
+        });
       });
-    });
 
     // PostsAPI.editPost("6ni6ok3ym7mf1p33lnez", "My Post", "My body rocks!")
     //
@@ -68,41 +67,35 @@ class App extends React.Component {
     // .then(comment => console.log(comment))
   }
 
-  addUserPost = (userInputs) => {
+  addUserPost = userInputs => {
     let { title, author, category, body } = userInputs;
     let id = uuidv1();
     let timestamp = Date.now();
-    let newPost = {id, timestamp, title, body, author, category};
+    let newPost = { id, timestamp, title, body, author, category };
     console.log("newPost before sent to DB");
     console.log(newPost);
-    PostsAPI.addPost(newPost)
-    .then(() => {
-      console.log("post added to backend DB")
-      PostsAPI.getAllPosts()
-      .then((posts) => {
+    PostsAPI.addPost(newPost).then(() => {
+      console.log("post added to backend DB");
+      PostsAPI.getAllPosts().then(posts => {
         this.setState({ myPosts: posts });
       });
     });
   };
 
   voteOnPost = (postID, vote) => {
-    PostsAPI.voteOnPost(postID,vote)
-    .then(() => {
+    PostsAPI.voteOnPost(postID, vote).then(() => {
       console.log("vote added to backend DB");
-      PostsAPI.getAllPosts()
-      .then((posts) => {
+      PostsAPI.getAllPosts().then(posts => {
         this.setState({ myPosts: posts });
       });
     });
-  }
+  };
 
-  deletePost = (postID) => {
-    PostsAPI.deletePost(postID)
-    .then(() => {
+  deletePost = postID => {
+    PostsAPI.deletePost(postID).then(() => {
       console.log("post removed from backend DB");
-      PostsAPI.getAllPosts()
-      .then((posts) => {
-        this.setState({ myPosts: posts});
+      PostsAPI.getAllPosts().then(posts => {
+        this.setState({ myPosts: posts });
       });
     });
   };
@@ -110,85 +103,98 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <Route exact
-          path="/"
-          render={() => (
-            <div>
-              <div class="w3-cell-row w3-blue-gray w3-margin-bottom w3-margin-top w3-padding-large">
-                <h3>Readit - a blantant rip off</h3>
-              </div>
-              {
-                <div class="w3-cell-row">
-                  <PostsControl
-                    listItems={this.state.myCategories}
-                    onSelectMenu={this.selectMenu}
-                  />
-                </div>
-              }
-              <div class="w3-cell-row">
-                <ListPosts
-                  posts={this.state.myPosts}
-                  handleVoteOnPost={this.voteOnPost}
-                  handlePostDelete={this.deletePost} />
-              </div>
-            </div>
-          )}
-        />
-
-        <Route
-          path="/addPost"
-          render={({ history }) => (
-            <div>
-              <div class="w3-cell-row w3-blue-gray w3-margin-bottom w3-margin-top w3-padding-large">
-                <h3>Readit - a blantant rip off</h3>
-              </div>
-
-              <div class="w3-cell-row">
-                <PostInput
-                  onAddPost={(post) => {
-                    this.addUserPost(post);
-                    history.push('/');
-                  }}
-                  categories={this.state.myCategories} />
-              </div>
-            </div>
-          )}
-        />
-
-        <Route
-          exact
-          path="/:category/:postID"
-          render={({history,match}) => (
-            <div>
-              <PostDetail post={this.state.myPosts.find(post => (post.id === match.params.postID))} />
-            </div>
-          )}
-        />
-
-        <Route
-          exact
-          path="/:category"
-          render={({history,match}) => (
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => (
               <div>
-                <div class="w3-cell-row w3-blue-gray w3-margin-bottom w3-margin-top w3-padding-large">
+                <div className="w3-cell-row w3-blue-gray w3-margin-bottom w3-margin-top w3-padding-large">
                   <h3>Readit - a blantant rip off</h3>
                 </div>
-                <div class="w3-cell-row">
+                {
+                  <div className="w3-cell-row">
+                    <PostsControl
+                      listItems={this.state.myCategories}
+                      onSelectMenu={this.selectMenu}
+                    />
+                  </div>
+                }
+                <div className="w3-cell-row">
+                  <ListPosts
+                    posts={this.state.myPosts}
+                    handleVoteOnPost={this.voteOnPost}
+                    handlePostDelete={this.deletePost}
+                  />
+                </div>
+              </div>
+            )}
+          />
+
+          <Route
+            exact
+            path="/addPost"
+            render={({ history }) => (
+              <div>
+                <div className="w3-cell-row w3-blue-gray w3-margin-bottom w3-margin-top w3-padding-large">
+                  <h3>Readit - a blantant rip off</h3>
+                </div>
+
+                <div className="w3-cell-row">
+                  <PostInput
+                    onAddPost={post => {
+                      this.addUserPost(post);
+                      history.push("/");
+                    }}
+                    categories={this.state.myCategories}
+                  />
+                </div>
+              </div>
+            )}
+          />
+
+          <Route
+            exact
+            path="/:category/:postID"
+            render={({ history, match }) => (
+              <div>
+                <PostDetail
+                  post={this.state.myPosts.find(
+                    post => post.id === match.params.postID
+                  )}
+                />
+              </div>
+            )}
+          />
+
+          <Route
+            exact
+            path="/:category"
+            render={({ history, match }) => (
+              <div>
+                <div className="w3-cell-row w3-blue-gray w3-margin-bottom w3-margin-top w3-padding-large">
+                  <h3>Readit - a blantant rip off</h3>
+                </div>
+                <div className="w3-cell-row">
                   <PostsControl
                     listItems={this.state.myCategories}
                     onSelectMenu={this.selectMenu}
                   />
                 </div>
-                <div class="w3-cell-row">
+                <div className="w3-cell-row">
                   <ListPosts
-                    posts={this.state.myPosts.filter(post => (post.category === match.params.category))}
+                    posts={this.state.myPosts.filter(
+                      post => post.category === match.params.category
+                    )}
                     category={match.params.category}
                     handleVoteOnPost={this.voteOnPost}
-                    handlePostDelete={this.deletePost} />
+                    handlePostDelete={this.deletePost}
+                  />
                 </div>
               </div>
-          )}
-        />
+            )}
+          />
+        </Switch>
       </div>
     );
   }
