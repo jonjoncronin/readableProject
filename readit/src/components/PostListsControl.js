@@ -5,12 +5,11 @@ import Menu from './Menu';
 
 class PostListsControl extends Component {
   render() {
-    const listItems = this.props.listItems;
+    // const listItems = this.props.listItems;
     const onSortPosts = this.props.onSortPosts;
     return (
       <div className="w3-card-4 w3-win8-mauve w3-padding w3-margin-bottom">
-        <Menu
-          listItems={this.props.listItems} />
+        <Menu />
 
         <div className="w3-card-4 w3-light-gray">
           <Link to="/addPost" className="w3-button">Add</Link>

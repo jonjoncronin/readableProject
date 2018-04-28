@@ -134,7 +134,6 @@ class App extends React.Component {
                 <Header />
                 <div className="w3-cell-row">
                   <PostListsControl
-                    listItems={this.state.myCategories}
                     onSelectMenu={this.selectMenu}
                     onSortPosts={this.sortPosts}
                   />
@@ -244,5 +243,4 @@ class App extends React.Component {
     );
   }
 }
-
 export default App;
