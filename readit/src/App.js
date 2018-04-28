@@ -138,6 +138,7 @@ class App extends React.Component {
                     onSelectMenu={this.selectMenu}
                     onSortPosts={this.sortPosts}
                   />
+                  <h4>All Posts</h4>
                 </div>
                 <div className="w3-cell-row">
                   <ListPosts
@@ -220,6 +221,7 @@ class App extends React.Component {
                     onSelectMenu={this.selectMenu}
                     onSortPosts={this.sortPosts}
                   />
+                  <h4>{match.params.category} Posts</h4>
                 </div>
                 <div className="w3-cell-row">
                   <ListPosts
