@@ -3,15 +3,12 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
-import { createStore } from 'redux';
-import reducer from "./reducers";
+import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
 
-const store = createStore(
-  reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = configureStore();
 
-console.log(store.getState());
+console.log("Store state:", store.getState());
 
 ReactDOM.render(
   <Provider store={store}>

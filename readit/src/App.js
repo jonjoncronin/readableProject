@@ -14,22 +14,14 @@ import PostEdit from "./components/PostEdit";
 
 class App extends React.Component {
   state = {
-    myCategories: [],
     myPosts: []
   };
 
   componentDidMount() {
-    PostsAPI.getAllCategories()
-      .then(categories => {
-        // console.log(categories);
-        this.setState({ myCategories: categories });
-      })
-      .then(() => {
-        PostsAPI.getAllPosts().then(posts => {
-          // console.log(posts);
-          this.setState({ myPosts: posts });
-        });
-      });
+    PostsAPI.getAllPosts().then(posts => {
+      // console.log(posts);
+      this.setState({ myPosts: posts });
+    });
 
     // PostsAPI.editPost("6ni6ok3ym7mf1p33lnez", "My Post", "My body rocks!")
     //
@@ -123,6 +115,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log("App State: ", this.state);
     return (
       <div className="app">
         <Switch>
@@ -134,7 +127,6 @@ class App extends React.Component {
                 <Header />
                 <div className="w3-cell-row">
                   <PostListsControl
-                    onSelectMenu={this.selectMenu}
                     onSortPosts={this.sortPosts}
                   />
                   <h4>All Posts</h4>
@@ -162,7 +154,6 @@ class App extends React.Component {
                       this.addUserPost(post);
                       history.push("/");
                     }}
-                    categories={this.state.myCategories}
                   />
                 </div>
               </div>
@@ -202,7 +193,6 @@ class App extends React.Component {
                       this.editUserPost(post, postID);
                       history.push("/");
                     }}
-                    categories={this.state.myCategories}
                   />
                 </div>
               </div>
@@ -216,7 +206,6 @@ class App extends React.Component {
                 <Header />
                 <div className="w3-cell-row">
                   <PostListsControl
-                    listItems={this.state.myCategories}
                     onSelectMenu={this.selectMenu}
                     onSortPosts={this.sortPosts}
                   />

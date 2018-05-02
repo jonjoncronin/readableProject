@@ -1,11 +1,6 @@
-import * as PostsAPI from "../utils/PostsAPI"
+import { combineReducers } from 'redux';
+import { categories } from './category_reducers';
 
-function categories (state = [], action) {
-  switch(action.type)
-  {
-    default:
-      return ['react', 'redux', 'udacity'];
-  }
-}
-
-export default categories;
+export default combineReducers({
+  categories
+});

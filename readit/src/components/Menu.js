@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
-
+import { fetchCategories } from '../actions/category_actions'
 
 class Menu extends Component {
+
+  componentDidMount() {
+    this.props.fetchMenuCats();
+  }
+
   render() {
-    console.log('Props', this.props);
+    console.log('Menu Props', this.props);
     return (
       <div className="w3-card-4 w3-bar w3-black">
         <label className="w3-bar-item">
@@ -18,11 +23,11 @@ class Menu extends Component {
           <div className="w3-dropdown-content w3-bar-block w3-card-4">
           {this.props.categories.map(item => (
             <Link
-              key={item}
+              key={item.name}
               className="w3-bar-item w3-button"
-              to={"/" + item}
+              to={"/" + item.name}
             >
-              {item}
+              {item.name}
             </Link>
           ))}
           </div>
@@ -31,8 +36,15 @@ class Menu extends Component {
     );
   }
 }
-function mapStateToProps(categories) {
-  return {categories};
-}
 
-export default connect(mapStateToProps)(Menu);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchMenuCats: () => dispatch(fetchCategories())
+  };
+};
+
+const mapStateToProps = (state) => {
+  return state.categories;
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);
