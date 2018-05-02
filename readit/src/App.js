@@ -133,7 +133,6 @@ class App extends React.Component {
                 </div>
                 <div className="w3-cell-row">
                   <ListPosts
-                    posts={this.state.myPosts}
                     handleVoteOnPost={this.voteOnPost}
                     handlePostDelete={this.deletePost}
                   />

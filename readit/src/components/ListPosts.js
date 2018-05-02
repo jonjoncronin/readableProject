@@ -1,8 +1,16 @@
 import React, { Component } from "react";
 import PostTease from './PostTease'
+import { connect } from 'react-redux';
+import { fetchPosts } from '../actions/post_actions';
 
 class ListPosts extends Component {
+
+  componentDidMount() {
+    this.props.fetchPosts();
+  }
+
   render() {
+    console.log('ListPosts Props', this.props);
     const { posts, category, handleVoteOnPost, handlePostDelete } = this.props;
 
     return (
@@ -27,4 +35,14 @@ class ListPosts extends Component {
   }
 }
 
-export default ListPosts;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchPosts: () => dispatch(fetchPosts())
+  };
+};
+
+const mapStateToProps = (state) => {
+  return state.posts;
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListPosts);
