@@ -1,44 +1,51 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import Menu from './Menu';
-
+import { connect } from 'react-redux';
+import { fetchPosts } from '../actions/post_actions';
+import { handleVoteOnPost } from '../actions/post_actions';
 
 class PostControl extends Component {
+
+  componentDidMount() {
+    this.props.fetchPosts();
+  }
+
   render() {
-    const { post, handleVoteOnPost, handlePostDelete } = this.props;
+    console.log('PostControl Props', this.props);
     return (
       <div className="w3-container w3-win8-olive">
         <button
           id="upVote"
-          onClick={event => {
-            handleVoteOnPost(post.id, event.target.id);
-          }}
           className="w3-button"
+          onClick={event => {
+            this.props.handleVoteOnPost(this.props.post.id, event.target.id);
+          }}
         >
           upVote
         </button>
         <button
           id="downVote"
-          onClick={event => {
-            handleVoteOnPost(post.id, event.target.id);
-          }}
           className="w3-button"
+          onClick={event => {
+            this.props.handleVoteOnPost(this.props.post.id, event.target.id);
+          }}
         >
           downVote
         </button>
         <Link
-          to={"/" + post.category + "/" + post.id + "/edit"}
+          to={"/" + this.props.post.category + "/" + this.props.post.id + "/edit"}
           className="w3-button"
         >
           edit
         </Link>
         <button
           id="deletePost"
+          className="w3-button"
           onClick={event => {
             console.log("handle deleting of post");
-            handlePostDelete(post.id);
+            this.props.handlePostDelete(this.props.post.id);
           }}
-          className="w3-button"
         >
           delete
         </button>
@@ -47,4 +54,15 @@ class PostControl extends Component {
   }
 }
 
-export default PostControl;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchPosts: () => dispatch(fetchPosts()),
+    handleVoteOnPost: (postID, vote) => dispatch(handleVoteOnPost(postID, vote))
+  };
+};
+
+const mapStateToProps = (state) => {
+  return state.posts;
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostControl);

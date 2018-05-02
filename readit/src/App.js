@@ -133,7 +133,6 @@ class App extends React.Component {
                 </div>
                 <div className="w3-cell-row">
                   <ListPosts
-                    handleVoteOnPost={this.voteOnPost}
                     handlePostDelete={this.deletePost}
                   />
                 </div>
@@ -169,7 +168,6 @@ class App extends React.Component {
                   post={this.state.myPosts.find(
                     post => post.id === match.params.postID
                   )}
-                  handleVoteOnPost={this.voteOnPost}
                   handlePostDelete={postID => {
                     this.deletePost(postID);
                     history.push("/");
@@ -216,7 +214,6 @@ class App extends React.Component {
                       post => post.category === match.params.category
                     )}
                     category={match.params.category}
-                    handleVoteOnPost={this.voteOnPost}
                     handlePostDelete={postID => {
                       this.deletePost(postID);
                       history.push("/"+ match.params.category);

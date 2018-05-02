@@ -4,7 +4,7 @@ import PostControl from "./PostControl";
 class PostDetail extends Component {
 
   render() {
-    const { post, handleVoteOnPost, handlePostDelete } = this.props;
+    const { post, handlePostDelete } = this.props;
     return (
       <div>
       {
@@ -33,7 +33,6 @@ class PostDetail extends Component {
             </div>
             <PostControl
               post={post}
-              handleVoteOnPost={handleVoteOnPost}
               handlePostDelete={handlePostDelete} />
           </div>
         ) : (
