@@ -9,18 +9,17 @@ export function posts (state = {posts: []}, action) {
       };
 
     case 'VOTE_ON_POST':
-      let newPosts = state.posts;
-      let postIndexToUpdate = newPosts.findIndex(entry => {
-        return entry.id === action.postID;
+      let newPosts = [...state.posts];
+      let postToEdit = newPosts.findIndex((post) => {
+        return post.id === action.postID;
       });
-
-      if(postIndexToUpdate >= 0) {
+      if(postToEdit >= 0) {
         switch(action.vote) {
           case 'upVote':
-            newPosts[postIndexToUpdate].voteScore++;
+            newPosts[postToEdit].voteScore++;
             break;
           case 'downVote':
-            newPosts[postIndexToUpdate].voteScore--;
+            newPosts[postToEdit].voteScore--;
             break;
           default:
           return state;
@@ -28,7 +27,6 @@ export function posts (state = {posts: []}, action) {
         // Update the backend DB while you're at it.
         PostsAPI.voteOnPost(action.postID, action.vote);
         return {
-          ...state,
           posts: newPosts
         };
       }
