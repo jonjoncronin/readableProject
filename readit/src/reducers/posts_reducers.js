@@ -1,15 +1,12 @@
 import * as PostsAPI from "../utils/PostsAPI";
 
-export function posts (state = {posts: []}, action) {
+export function posts (state = [], action) {
   switch(action.type) {
     case 'RECEIVE_POSTS':
-      return {
-        ...state,
-        posts: action.posts
-      };
+      return action.posts;
 
     case 'VOTE_ON_POST': {
-      let newPosts = [...state.posts];
+      let newPosts = [...state];
       let postToEdit = newPosts.findIndex((post) => {
         return post.id === action.postID;
       });
@@ -26,23 +23,19 @@ export function posts (state = {posts: []}, action) {
         }
         // Update the backend DB while you're at it.
         PostsAPI.voteOnPost(action.postID, action.vote);
-        return {
-          posts: newPosts
-        };
+        return newPosts;
       }
       else {
         return state;
       }
     }
     case 'DELETE_POST': {
-      let newPosts = state.posts.filter(entry => {
+      let newPosts = state.filter(entry => {
         return entry.id !== action.postID;
       });
       // Update the backend DB while you're at it.
       PostsAPI.deletePost(action.postID);
-      return {
-        posts: newPosts
-      };
+      return newPosts;
     }
     default:
       return state;

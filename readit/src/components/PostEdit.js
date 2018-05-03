@@ -92,7 +92,7 @@ class PostEdit extends Component {
 const mapStateToProps = state => {
   return {
     categories: state.categories,
-    posts: state.posts.posts
+    posts: state.posts
   };
 };
 

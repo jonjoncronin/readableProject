@@ -37,7 +37,7 @@ class ListPosts extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return state.posts;
+  return {posts: state.posts};
 };
 
 export default connect(mapStateToProps)(ListPosts);

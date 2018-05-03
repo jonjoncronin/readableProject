@@ -7,13 +7,14 @@ import { handleVoteOnPost, handlePostDelete } from '../actions/post_actions';
 class PostControl extends Component {
   render() {
     console.log('PostControl Props', this.props);
+    const { post, handleVoteOnPost, handlePostDelete} = this.props;
     return (
       <div className="w3-container w3-win8-olive">
         <button
           id="upVote"
           className="w3-button"
           onClick={event => {
-            this.props.handleVoteOnPost(this.props.post.id, event.target.id);
+            handleVoteOnPost(post.id, event.target.id);
           }}
         >
           upVote
@@ -22,13 +23,13 @@ class PostControl extends Component {
           id="downVote"
           className="w3-button"
           onClick={event => {
-            this.props.handleVoteOnPost(this.props.post.id, event.target.id);
+            handleVoteOnPost(post.id, event.target.id);
           }}
         >
           downVote
         </button>
         <Link
-          to={"/" + this.props.post.category + "/" + this.props.post.id + "/edit"}
+          to={"/" + post.category + "/" + post.id + "/edit"}
           className="w3-button"
         >
           edit
@@ -38,7 +39,7 @@ class PostControl extends Component {
           className="w3-button"
           onClick={event => {
             console.log("handle deleting of post");
-            this.props.handlePostDelete(this.props.post.id);
+            handlePostDelete(post.id);
           }}
         >
           delete
@@ -55,8 +56,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const mapStateToProps = (state) => {
-  return state.posts;
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(PostControl);
+export default connect(null, mapDispatchToProps)(PostControl);
