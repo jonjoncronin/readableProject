@@ -2,14 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import serializeForm from 'form-serialize'
 import { connect } from 'react-redux';
-import { fetchCategories } from '../actions/category_actions'
 
 class PostInput extends Component {
-
-  componentDidMount() {
-    this.props.fetchMenuCats();
-  }
-
   handleSubmit = (event) => {
     event.preventDefault();
     const onAddPost = this.props.onAddPost;
@@ -80,14 +74,8 @@ class PostInput extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchMenuCats: () => dispatch(fetchCategories())
-  };
-};
-
 const mapStateToProps = (state) => {
   return state.categories;
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostInput);
+export default connect(mapStateToProps)(PostInput);

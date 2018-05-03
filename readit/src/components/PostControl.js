@@ -2,15 +2,9 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import Menu from './Menu';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../actions/post_actions';
 import { handleVoteOnPost } from '../actions/post_actions';
 
 class PostControl extends Component {
-
-  componentDidMount() {
-    this.props.fetchPosts();
-  }
-
   render() {
     console.log('PostControl Props', this.props);
     return (
@@ -56,7 +50,6 @@ class PostControl extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchPosts: () => dispatch(fetchPosts()),
     handleVoteOnPost: (postID, vote) => dispatch(handleVoteOnPost(postID, vote))
   };
 };

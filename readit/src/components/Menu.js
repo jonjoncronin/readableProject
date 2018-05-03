@@ -1,13 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
-import { fetchCategories } from '../actions/category_actions'
 
 class Menu extends Component {
-
-  componentDidMount() {
-    this.props.fetchMenuCats();
-  }
 
   render() {
     console.log('Menu Props', this.props);
@@ -37,14 +32,8 @@ class Menu extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchMenuCats: () => dispatch(fetchCategories())
-  };
-};
-
 const mapStateToProps = (state) => {
   return state.categories;
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+export default connect(mapStateToProps)(Menu);

@@ -2,14 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import serializeForm from 'form-serialize'
 import { connect } from 'react-redux';
-import { fetchCategories } from '../actions/category_actions'
 
 class PostEdit extends Component {
-
-  componentDidMount() {
-    this.props.fetchMenuCats();
-  }
-
   handleSubmit = (event) => {
     event.preventDefault();
     console.log("submitting");
@@ -91,14 +85,8 @@ class PostEdit extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchMenuCats: () => dispatch(fetchCategories())
-  };
-};
-
 const mapStateToProps = (state) => {
   return state.categories;
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostEdit);
+export default connect(mapStateToProps)(PostEdit);

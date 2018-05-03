@@ -23,7 +23,6 @@ class PostTease extends Component {
         </div>
         <PostControl
           post={post}
-          handleVoteOnPost={handleVoteOnPost}
           handlePostDelete={handlePostDelete} />
       </div>
     );

@@ -210,9 +210,6 @@ class App extends React.Component {
                 </div>
                 <div className="w3-cell-row">
                   <ListPosts
-                    posts={this.state.myPosts.filter(
-                      post => post.category === match.params.category
-                    )}
                     category={match.params.category}
                     handlePostDelete={postID => {
                       this.deletePost(postID);

@@ -5,10 +5,18 @@ import './index.css';
 import App from './App';
 import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
+import { fetchCategories } from './actions/category_actions';
+import { fetchPosts } from './actions/post_actions';
 
 const store = configureStore();
 
-console.log("Store state:", store.getState());
+store.dispatch(fetchCategories())
+.then(() => {
+  store.dispatch(fetchPosts())
+  .then(() => {
+    console.log("Store state:", store.getState());
+  })
+});
 
 ReactDOM.render(
   <Provider store={store}>
