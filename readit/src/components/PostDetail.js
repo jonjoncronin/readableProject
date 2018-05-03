@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class PostDetail extends Component {
 
   render() {
-    const { postID, handlePostDelete } = this.props;
+    const { postID } = this.props;
     let post = this.props.posts.find(entry => {
       return entry.id === postID;
     });
@@ -38,7 +38,7 @@ class PostDetail extends Component {
             </div>
             <PostControl
               post={post}
-              handlePostDelete={handlePostDelete} />
+            />
           </div>
         ) : (
           <div className="w3-card-2 w3-black">

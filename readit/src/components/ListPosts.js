@@ -6,7 +6,7 @@ class ListPosts extends Component {
 
   render() {
     console.log('ListPosts Props', this.props);
-    const { posts, category, handlePostDelete } = this.props;
+    const { posts, category } = this.props;
     let postsToView = [];
     if(category) {
       postsToView = posts.filter((entry) => {
@@ -23,8 +23,7 @@ class ListPosts extends Component {
             postsToView.map(post => (
               <PostTease
                 key={post.id}
-                post={post}
-                handlePostDelete={handlePostDelete} />
+                post={post} />
             ))
           ) : (
             <div>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import Menu from './Menu';
 import { connect } from 'react-redux';
-import { handleVoteOnPost } from '../actions/post_actions';
+import { handleVoteOnPost, handlePostDelete } from '../actions/post_actions';
 
 class PostControl extends Component {
   render() {
@@ -50,7 +50,8 @@ class PostControl extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleVoteOnPost: (postID, vote) => dispatch(handleVoteOnPost(postID, vote))
+    handleVoteOnPost: (postID, vote) => dispatch(handleVoteOnPost(postID, vote)),
+    handlePostDelete: (postID) => dispatch(handlePostDelete(postID))
   };
 };
 

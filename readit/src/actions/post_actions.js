@@ -1,7 +1,6 @@
 import * as PostsAPI from "../utils/PostsAPI";
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
-
 export const receivePosts = posts => ({
   type: 'RECEIVE_POSTS',
   posts
@@ -13,7 +12,6 @@ export const fetchPosts = () => dispatch => (
   ));
 
 export const VOTE_ON_POST = 'VOTE_ON_POST';
-
 export const voteOnPost = (postID, vote) => ({
   type: 'VOTE_ON_POST',
   postID,
@@ -22,4 +20,14 @@ export const voteOnPost = (postID, vote) => ({
 
 export const handleVoteOnPost = (postID, vote) => dispatch => {
   dispatch(voteOnPost(postID, vote));
+};
+
+export const DELETE_POST = 'DELETE_POST';
+export const deletePost = (postID) => ({
+  type: 'DELETE_POST',
+  postID
+});
+
+export const handlePostDelete = (postID) => dispatch => {
+  dispatch(deletePost(postID));
 };

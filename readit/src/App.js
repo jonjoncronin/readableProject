@@ -80,15 +80,6 @@ class App extends React.Component {
     });
   };
 
-  deletePost = postID => {
-    PostsAPI.deletePost(postID).then(() => {
-      console.log("post removed from backend DB");
-      PostsAPI.getAllPosts().then(posts => {
-        this.setState({ myPosts: posts });
-      });
-    });
-  };
-
   sortPosts = type => {
     let thePosts = this.state.myPosts;
     thePosts.sort(sortBy(type));
@@ -113,9 +104,7 @@ class App extends React.Component {
                   <h4>All Posts</h4>
                 </div>
                 <div className="w3-cell-row">
-                  <ListPosts
-                    handlePostDelete={this.deletePost}
-                  />
+                  <ListPosts />
                 </div>
               </div>
             )}
@@ -147,10 +136,6 @@ class App extends React.Component {
                 <Header />
                 <PostDetail
                   postID={match.params.postID}
-                  handlePostDelete={postID => {
-                    this.deletePost(postID);
-                    history.push("/");
-                  }}
                 />
               </div>
             )}
@@ -191,10 +176,6 @@ class App extends React.Component {
                 <div className="w3-cell-row">
                   <ListPosts
                     category={match.params.category}
-                    handlePostDelete={postID => {
-                      this.deletePost(postID);
-                      history.push("/"+ match.params.category);
-                    }}
                   />
                 </div>
               </div>

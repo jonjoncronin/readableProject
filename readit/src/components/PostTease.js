@@ -4,7 +4,7 @@ import PostControl from "./PostControl";
 
 class PostTease extends Component {
   render() {
-    const { post, handlePostDelete } = this.props;
+    const { post } = this.props;
 
     return (
       <div className="w3-card-2 w3-white w3-padding" style={{ marginBottom: "8px" }}>
@@ -22,8 +22,7 @@ class PostTease extends Component {
           </div>
         </div>
         <PostControl
-          post={post}
-          handlePostDelete={handlePostDelete} />
+          post={post} />
       </div>
     );
   }

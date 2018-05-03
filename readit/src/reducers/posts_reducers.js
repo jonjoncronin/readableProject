@@ -8,7 +8,7 @@ export function posts (state = {posts: []}, action) {
         posts: action.posts
       };
 
-    case 'VOTE_ON_POST':
+    case 'VOTE_ON_POST': {
       let newPosts = [...state.posts];
       let postToEdit = newPosts.findIndex((post) => {
         return post.id === action.postID;
@@ -33,7 +33,17 @@ export function posts (state = {posts: []}, action) {
       else {
         return state;
       }
-
+    }
+    case 'DELETE_POST': {
+      let newPosts = state.posts.filter(entry => {
+        return entry.id !== action.postID;
+      });
+      // Update the backend DB while you're at it.
+      PostsAPI.deletePost(action.postID);
+      return {
+        posts: newPosts
+      };
+    }
     default:
       return state;
   }
