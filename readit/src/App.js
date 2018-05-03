@@ -18,25 +18,12 @@ class App extends React.Component {
     //
     // PostsAPI.editComment("8tu4bsun805n8un48ve89", "My comment body rocks!")
     //
-    // PostsAPI.voteOnPost("8xf0y6ziyjabvozdd253nd","downVote")
-    //
     // PostsAPI.voteOnComment("8tu4bsun805n8un48ve89","downVote")
     //
     // PostsAPI.deleteComment("8tu4bsun805n8un48ve89")
     //
-    // PostsAPI.deletePost("8xf0y6ziyjabvozdd253nd")
-    //
     // PostsAPI.getCommentsForPost("8xf0y6ziyjabvozdd253nd")
     // .then(comments => console.log(comments))
-    //
-    // PostsAPI.getPost("8xf0y6ziyjabvozdd253nd")
-    // .then(post => console.log(post))
-
-    // PostsAPI.getPostsForCategory("redux")
-    // .then(posts => console.log(posts))
-    //
-    // PostsAPI.getAllPosts()
-    // .then(posts => console.log(posts))
     //
     // PostsAPI.getAllPosts()
     // .then((posts) => {
