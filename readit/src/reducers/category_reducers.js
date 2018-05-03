@@ -1,11 +1,9 @@
 
-export function categories (state = {categories: []}, action) {
+export function categories (state = [], action) {
   switch(action.type)
   {
     case 'RECEIVE_CATEGORIES':
-      return {
-        ...state,
-        categories: action.categories};
+      return action.categories;
     default:
       return state;
   }
