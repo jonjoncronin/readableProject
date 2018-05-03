@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import PostControl from "./PostControl";
+import { connect } from 'react-redux';
 
 class PostDetail extends Component {
 
   render() {
-    const { post, handlePostDelete } = this.props;
+    const { postID, handlePostDelete } = this.props;
+    let post = this.props.posts.find(entry => {
+      return entry.id === postID;
+    });
+    console.log('PostDetails Props ', this.props);
     return (
       <div>
       {
@@ -45,5 +50,8 @@ class PostDetail extends Component {
     );
   };
 }
+const mapStateToProps = (state) => {
+  return state.posts;
+};
 
-export default PostDetail;
+export default connect(mapStateToProps)(PostDetail);

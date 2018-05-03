@@ -13,15 +13,6 @@ import PostDetail from "./components/PostDetail";
 import PostEdit from "./components/PostEdit";
 
 class App extends React.Component {
-  state = {
-    myPosts: []
-  };
-
-  componentDidMount() {
-    PostsAPI.getAllPosts().then(posts => {
-      // console.log(posts);
-      this.setState({ myPosts: posts });
-    });
 
     // PostsAPI.editPost("6ni6ok3ym7mf1p33lnez", "My Post", "My body rocks!")
     //
@@ -60,7 +51,6 @@ class App extends React.Component {
     //
     // PostsAPI.getComment("8tu4bsun805n8un48ve89")
     // .then(comment => console.log(comment))
-  }
 
   addUserPost = userInputs => {
     let { title, author, category, body } = userInputs;
@@ -90,15 +80,6 @@ class App extends React.Component {
     });
   };
 
-  voteOnPost = (postID, vote) => {
-    PostsAPI.voteOnPost(postID, vote).then(() => {
-      console.log("vote added to backend DB");
-      PostsAPI.getAllPosts().then(posts => {
-        this.setState({ myPosts: posts });
-      });
-    });
-  };
-
   deletePost = postID => {
     PostsAPI.deletePost(postID).then(() => {
       console.log("post removed from backend DB");
@@ -113,9 +94,9 @@ class App extends React.Component {
     thePosts.sort(sortBy(type));
     this.setState({ myPosts: thePosts });
   }
+    // console.log("App State: ", this.state);
 
   render() {
-    console.log("App State: ", this.state);
     return (
       <div className="app">
         <Switch>
@@ -165,9 +146,7 @@ class App extends React.Component {
               <div>
                 <Header />
                 <PostDetail
-                  post={this.state.myPosts.find(
-                    post => post.id === match.params.postID
-                  )}
+                  postID={match.params.postID}
                   handlePostDelete={postID => {
                     this.deletePost(postID);
                     history.push("/");
@@ -185,7 +164,7 @@ class App extends React.Component {
                 <Header />
                 <div className="w3-cell-row">
                   <PostEdit
-                    post={this.state.myPosts.find(post => post.id === match.params.postID)}
+                    postID={match.params.postID}
                     onEditPost={(post,postID) => {
                       this.editUserPost(post, postID);
                       history.push("/");
@@ -195,6 +174,7 @@ class App extends React.Component {
               </div>
             )}
           />
+
           <Route
             exact
             path="/:category"
@@ -220,6 +200,7 @@ class App extends React.Component {
               </div>
             )}
           />
+
         </Switch>
       </div>
     );
