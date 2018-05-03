@@ -27,7 +27,7 @@ class ListPosts extends Component {
             ))
           ) : (
             <div>
-              No posts yet for {category}
+              No posts yet for this category
             </div>
           )
         }
