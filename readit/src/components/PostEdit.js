@@ -1,29 +1,41 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import serializeForm from "form-serialize";
 import { connect } from "react-redux";
+import { handlePostEdit } from '../actions/post_actions';
 
 class PostEdit extends Component {
+
+  state = {
+    editSubmitted: false
+  }
+
   handleSubmit = event => {
     event.preventDefault();
     console.log("submitting");
-    const post = this.props.post;
-    const onEditPost = this.props.onEditPost;
+    const { postID, handlePostEdit } = this.props;
     const userInputs = serializeForm(event.target, { hash: true });
     console.log(userInputs);
-    console.log(post.id);
-    if (onEditPost) {
-      onEditPost(userInputs, post.id);
+    if (handlePostEdit) {
+      handlePostEdit(postID, userInputs);
+      // return to the root page
+      this.setState(() => ({
+        editSubmitted: true
+      }));
     }
   };
 
   render() {
     console.log("PostEdit Props", this.props);
-    const { postID, categories, posts } = this.props;
+    const { postID, posts } = this.props;
 
     let post = posts.find(entry => {
       return entry.id === postID;
     });
+
+    if(this.state.editSubmitted === true) {
+      return <Redirect to='/' />
+    }
 
     return (
       <div className="w3-card-4 w3-win8-mauve w3-padding">
@@ -53,23 +65,6 @@ class PostEdit extends Component {
             disabled
           />
 
-          <label>Category</label>
-          <select
-            name="category"
-            className="w3-input"
-            defaultValue={post ? post.category : "choose"}
-          >
-            <option key="choose" value="choose" disabled>
-              Choose one...
-            </option>
-
-            {categories.map(item => (
-              <option key={item.name} value={item.name} disabled>
-                {item.name}
-              </option>
-            ))}
-          </select>
-
           <label>Post</label>
           <textarea
             name="body"
@@ -91,9 +86,14 @@ class PostEdit extends Component {
 
 const mapStateToProps = state => {
   return {
-    categories: state.categories,
     posts: state.posts
   };
 };
 
-export default connect(mapStateToProps)(PostEdit);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handlePostEdit: (postID, userInputs) => dispatch(handlePostEdit(postID, userInputs)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostEdit);

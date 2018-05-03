@@ -31,3 +31,14 @@ export const deletePost = (postID) => ({
 export const handlePostDelete = (postID) => dispatch => {
   dispatch(deletePost(postID));
 };
+
+export const EDIT_POST = 'EDIT_POST';
+export const editPost = (postID, userInputs) => ({
+  type: 'EDIT_POST',
+  postID,
+  userInputs
+});
+
+export const handlePostEdit = (postID, userInputs) => dispatch => {
+  dispatch(editPost(postID, userInputs));
+};

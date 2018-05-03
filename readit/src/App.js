@@ -54,19 +54,6 @@ class App extends React.Component {
     });
   };
 
-  editUserPost = (userInputs, postID) => {
-    let {title, author, category, body } = userInputs;
-    console.log("editting post " + postID)
-    console.log(title + " " + author + " " + category + " " + body);
-    PostsAPI.editPost(postID, title, body)
-    .then(() => {
-      console.log("post edit made to backend DB");
-      PostsAPI.getAllPosts().then(posts => {
-        this.setState({ myPosts: posts });
-      });
-    });
-  };
-
   sortPosts = type => {
     let thePosts = this.state.myPosts;
     thePosts.sort(sortBy(type));
@@ -137,10 +124,6 @@ class App extends React.Component {
                 <div className="w3-cell-row">
                   <PostEdit
                     postID={match.params.postID}
-                    onEditPost={(post,postID) => {
-                      this.editUserPost(post, postID);
-                      history.push("/");
-                    }}
                   />
                 </div>
               </div>
