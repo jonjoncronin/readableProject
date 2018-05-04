@@ -1,4 +1,4 @@
-import uuidv1 from "uuid"
+import uuidv1 from "uuid";
 const restURL = "http://localhost:3001";
 
 // Generate a unique token for accessing data on the backend server.
@@ -39,8 +39,7 @@ export const getAllCategories = () =>
  * }
  */
 export const getAllPosts = () =>
-  fetch(`${restURL}/posts`, { headers })
-    .then(res => res.json());
+  fetch(`${restURL}/posts`, { headers }).then(res => res.json());
 
 /**
  * Call RESTful API to backend server to retrieve posts for a specific category.
@@ -58,8 +57,7 @@ export const getAllPosts = () =>
  * }
  */
 export const getPostsForCategory = category =>
-  fetch(`${restURL}/${category}/posts`, { headers })
-    .then(res => res.json());
+  fetch(`${restURL}/${category}/posts`, { headers }).then(res => res.json());
 
 /**
  * Call RESTful API to backend server to retrieve a specific post.
@@ -77,8 +75,7 @@ export const getPostsForCategory = category =>
  * }
  */
 export const getPost = postID =>
-  fetch(`${restURL}/posts/${postID}`, { headers })
-    .then(res => res.json());
+  fetch(`${restURL}/posts/${postID}`, { headers }).then(res => res.json());
 
 /**
  * Call RESTful API to backend server to retrieve all comments for a specific
@@ -96,8 +93,9 @@ export const getPost = postID =>
  * }
  */
 export const getCommentsForPost = postID =>
-  fetch(`${restURL}/posts/${postID}/comments`, { headers })
-    .then(res => res.json());
+  fetch(`${restURL}/posts/${postID}/comments`, { headers }).then(res =>
+    res.json()
+  );
 
 /**
  * Call RESTful API to backend server to retrieve a specific comment
@@ -114,8 +112,9 @@ export const getCommentsForPost = postID =>
  * }
  */
 export const getComment = commentID =>
-  fetch(`${restURL}/comments/${commentID}`, { headers })
-    .then(res => res.json());
+  fetch(`${restURL}/comments/${commentID}`, { headers }).then(res =>
+    res.json()
+  );
 
 /**
  * Call RESTful API to add a post to the backend server DB
@@ -126,16 +125,15 @@ export const getComment = commentID =>
  * @return {Promise} - a Promise object indicating the result of the async
  *                     operation being made.
  */
-export const addPost = (newPost) => {
+export const addPost = newPost => {
   let fetchPromise = fetch(`${restURL}/posts`, {
-      method: 'POST',
-      headers: {
-        ...headers,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newPost)
-    })
-    .then(res => res.json());
+    method: "POST",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(newPost)
+  }).then(res => res.json());
   return fetchPromise;
 };
 
@@ -150,14 +148,13 @@ export const addCommentToPost = (body, author, parentId) => {
   let id = uuidv1();
   let timestamp = Date.now();
   fetch(`${restURL}/comments`, {
-      method: 'POST',
-      headers: {
-        ...headers,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ id, timestamp, body, author, parentId })
-    })
-    .then(res => res.json());
+    method: "POST",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ id, timestamp, body, author, parentId })
+  }).then(res => res.json());
 };
 
 /**
@@ -169,15 +166,14 @@ export const addCommentToPost = (body, author, parentId) => {
  */
 export const voteOnPost = (postID, voteOption) => {
   let fetchPromise = fetch(`${restURL}/posts/${postID}`, {
-      method: 'POST',
-      headers: {
-        ...headers,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ 'option':voteOption })
-    })
-    .then(res => res.json());
-    return fetchPromise;
+    method: "POST",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ option: voteOption })
+  }).then(res => res.json());
+  return fetchPromise;
 };
 
 /**
@@ -190,14 +186,13 @@ export const voteOnPost = (postID, voteOption) => {
  */
 export const voteOnComment = (commentID, voteOption) => {
   fetch(`${restURL}/comments/${commentID}`, {
-      method: 'POST',
-      headers: {
-        ...headers,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ 'option':voteOption })
-    })
-    .then(res => res.json());
+    method: "POST",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ option: voteOption })
+  }).then(res => res.json());
 };
 
 /**
@@ -210,15 +205,14 @@ export const voteOnComment = (commentID, voteOption) => {
  */
 export const editPost = (postID, title, body) => {
   let fetchPromise = fetch(`${restURL}/posts/${postID}`, {
-      method: 'PUT',
-      headers: {
-        ...headers,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ postID, title, body })
-    })
-    .then(res => res.json());
-    return fetchPromise;
+    method: "PUT",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ postID, title, body })
+  }).then(res => res.json());
+  return fetchPromise;
 };
 
 /**
@@ -231,14 +225,13 @@ export const editPost = (postID, title, body) => {
 export const editComment = (commentID, body) => {
   let timestamp = Date.now();
   fetch(`${restURL}/comments/${commentID}`, {
-      method: 'PUT',
-      headers: {
-        ...headers,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ commentID, timestamp, body })
-    })
-    .then(res => res.json());
+    method: "PUT",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ commentID, timestamp, body })
+  }).then(res => res.json());
 };
 
 /**
@@ -250,16 +243,15 @@ export const editComment = (commentID, body) => {
  * @return {Object} the jsonified object of the fetch response. In this case
  * the post object for the post being "deleted"
  */
-export const deletePost = (postID) => {
+export const deletePost = postID => {
   let fetchPromise = fetch(`${restURL}/posts/${postID}`, {
-      method: 'DELETE',
-      headers: {
-        ...headers,
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(res => res.json());
-    return fetchPromise;
+    method: "DELETE",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    }
+  }).then(res => res.json());
+  return fetchPromise;
 };
 
 /**
@@ -270,13 +262,12 @@ export const deletePost = (postID) => {
  * @return {Object} the jsonified object of the fetch response. In this case
  * the comment object for the comment being "deleted"
  */
-export const deleteComment = (commentID) => {
+export const deleteComment = commentID => {
   fetch(`${restURL}/comments/${commentID}`, {
-      method: 'DELETE',
-      headers: {
-        ...headers,
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(res => res.json());
+    method: "DELETE",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    }
+  }).then(res => res.json());
 };

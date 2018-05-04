@@ -1,45 +1,44 @@
 import * as PostsAPI from "../utils/PostsAPI";
 import uuidv1 from "uuid";
-import sortBy from 'sort-by'
+import sortBy from "sort-by";
 
-export function posts (state = [], action) {
-  switch(action.type) {
-    case 'RECEIVE_POSTS': {
+export function posts(state = [], action) {
+  switch (action.type) {
+    case "RECEIVE_POSTS": {
       return action.posts;
     }
 
-    case 'SORT_POSTS': {
+    case "SORT_POSTS": {
       let newPosts = [...state];
       newPosts.sort(sortBy(action.sortType));
       return newPosts;
     }
 
-    case 'VOTE_ON_POST': {
+    case "VOTE_ON_POST": {
       let newPosts = [...state];
-      let postToEdit = newPosts.findIndex((post) => {
+      let postToEdit = newPosts.findIndex(post => {
         return post.id === action.postID;
       });
-      if(postToEdit >= 0) {
-        switch(action.vote) {
-          case 'upVote':
+      if (postToEdit >= 0) {
+        switch (action.vote) {
+          case "upVote":
             newPosts[postToEdit].voteScore++;
             break;
-          case 'downVote':
+          case "downVote":
             newPosts[postToEdit].voteScore--;
             break;
           default:
-          return state;
+            return state;
         }
         // Update the backend DB while you're at it.
         PostsAPI.voteOnPost(action.postID, action.vote);
         return newPosts;
-      }
-      else {
+      } else {
         return state;
       }
     }
 
-    case 'ADD_POST': {
+    case "ADD_POST": {
       let newPosts = [...state];
       let { title, author, category, body } = action.userInputs;
       let post = {
@@ -60,7 +59,7 @@ export function posts (state = [], action) {
       return newPosts;
     }
 
-    case 'DELETE_POST': {
+    case "DELETE_POST": {
       let newPosts = state.filter(entry => {
         return entry.id !== action.postID;
       });
@@ -69,19 +68,22 @@ export function posts (state = [], action) {
       return newPosts;
     }
 
-    case 'EDIT_POST': {
+    case "EDIT_POST": {
       let newPosts = [...state];
-      let postToEdit = newPosts.findIndex((post) => {
+      let postToEdit = newPosts.findIndex(post => {
         return post.id === action.postID;
       });
-      if(postToEdit >= 0) {
+      if (postToEdit >= 0) {
         newPosts[postToEdit].title = action.userInputs.title;
         newPosts[postToEdit].body = action.userInputs.body;
         // Update the backend DB while you're at it.
-        PostsAPI.editPost(action.postID, action.userInputs.title, action.userInputs.body);
+        PostsAPI.editPost(
+          action.postID,
+          action.userInputs.title,
+          action.userInputs.body
+        );
         return newPosts;
-      }
-      else {
+      } else {
         return state;
       }
     }

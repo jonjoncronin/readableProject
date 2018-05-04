@@ -5,7 +5,9 @@ class Header extends Component {
   render() {
     return (
       <div className="w3-cell-row w3-blue-gray w3-margin-bottom w3-margin-top w3-padding-large">
-        <h3><Link to="/">Readit</Link> - a blantant rip off</h3>
+        <h3>
+          <Link to="/">Readit</Link> - a blantant rip off
+        </h3>
       </div>
     );
   }

@@ -9,33 +9,32 @@ import PostDetail from "./components/PostDetail";
 import PostEdit from "./components/PostEdit";
 
 class App extends React.Component {
+  // PostsAPI.editPost("6ni6ok3ym7mf1p33lnez", "My Post", "My body rocks!")
+  //
+  // PostsAPI.editComment("8tu4bsun805n8un48ve89", "My comment body rocks!")
+  //
+  // PostsAPI.voteOnComment("8tu4bsun805n8un48ve89","downVote")
+  //
+  // PostsAPI.deleteComment("8tu4bsun805n8un48ve89")
+  //
+  // PostsAPI.getCommentsForPost("8xf0y6ziyjabvozdd253nd")
+  // .then(comments => console.log(comments))
+  //
+  // PostsAPI.getAllPosts()
+  // .then((posts) => {
+  //   posts.forEach((post) => {
+  //     PostsAPI.getCommentsForPost(post.id)
+  //     .then((comments) => {
+  //       console.log(post.title)
+  //       console.log(comments)
+  //     })
+  //   })
+  // })
+  //
+  // PostsAPI.getComment("8tu4bsun805n8un48ve89")
+  // .then(comment => console.log(comment))
 
-    // PostsAPI.editPost("6ni6ok3ym7mf1p33lnez", "My Post", "My body rocks!")
-    //
-    // PostsAPI.editComment("8tu4bsun805n8un48ve89", "My comment body rocks!")
-    //
-    // PostsAPI.voteOnComment("8tu4bsun805n8un48ve89","downVote")
-    //
-    // PostsAPI.deleteComment("8tu4bsun805n8un48ve89")
-    //
-    // PostsAPI.getCommentsForPost("8xf0y6ziyjabvozdd253nd")
-    // .then(comments => console.log(comments))
-    //
-    // PostsAPI.getAllPosts()
-    // .then((posts) => {
-    //   posts.forEach((post) => {
-    //     PostsAPI.getCommentsForPost(post.id)
-    //     .then((comments) => {
-    //       console.log(post.title)
-    //       console.log(comments)
-    //     })
-    //   })
-    // })
-    //
-    // PostsAPI.getComment("8tu4bsun805n8un48ve89")
-    // .then(comment => console.log(comment))
-
-    // console.log("App State: ", this.state);
+  // console.log("App State: ", this.state);
 
   render() {
     return (
@@ -77,9 +76,7 @@ class App extends React.Component {
             render={({ history, match }) => (
               <div>
                 <Header />
-                <PostDetail
-                  postID={match.params.postID}
-                />
+                <PostDetail postID={match.params.postID} />
               </div>
             )}
           />
@@ -87,13 +84,11 @@ class App extends React.Component {
           <Route
             exact
             path="/:category/:postID/edit"
-            render= {({ history,match }) => (
+            render={({ history, match }) => (
               <div>
                 <Header />
                 <div className="w3-cell-row">
-                  <PostEdit
-                    postID={match.params.postID}
-                  />
+                  <PostEdit postID={match.params.postID} />
                 </div>
               </div>
             )}
@@ -110,14 +105,11 @@ class App extends React.Component {
                   <h4>{match.params.category} Posts</h4>
                 </div>
                 <div className="w3-cell-row">
-                  <ListPosts
-                    category={match.params.category}
-                  />
+                  <ListPosts category={match.params.category} />
                 </div>
               </div>
             )}
           />
-
         </Switch>
       </div>
     );

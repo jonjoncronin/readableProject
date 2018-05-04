@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { handleVoteOnPost, handlePostDelete } from '../actions/post_actions';
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { handleVoteOnPost, handlePostDelete } from "../actions/post_actions";
 
 class PostControl extends Component {
   render() {
-    console.log('PostControl Props', this.props);
-    const { post, handleVoteOnPost, handlePostDelete} = this.props;
+    console.log("PostControl Props", this.props);
+    const { post, handleVoteOnPost, handlePostDelete } = this.props;
     return (
       <div className="w3-container w3-win8-olive">
         <button
@@ -48,10 +48,11 @@ class PostControl extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    handleVoteOnPost: (postID, vote) => dispatch(handleVoteOnPost(postID, vote)),
-    handlePostDelete: (postID) => dispatch(handlePostDelete(postID))
+    handleVoteOnPost: (postID, vote) =>
+      dispatch(handleVoteOnPost(postID, vote)),
+    handlePostDelete: postID => dispatch(handlePostDelete(postID))
   };
 };
 

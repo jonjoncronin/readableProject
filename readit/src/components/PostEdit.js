@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import serializeForm from "form-serialize";
 import { connect } from "react-redux";
-import { handlePostEdit } from '../actions/post_actions';
+import { handlePostEdit } from "../actions/post_actions";
 
 class PostEdit extends Component {
-
   state = {
     editSubmitted: false
-  }
+  };
 
   handleSubmit = event => {
     event.preventDefault();
@@ -33,8 +32,8 @@ class PostEdit extends Component {
       return entry.id === postID;
     });
 
-    if(this.state.editSubmitted === true) {
-      return <Redirect to='/' />
+    if (this.state.editSubmitted === true) {
+      return <Redirect to="/" />;
     }
 
     return (
@@ -90,9 +89,10 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    handlePostEdit: (postID, userInputs) => dispatch(handlePostEdit(postID, userInputs)),
+    handlePostEdit: (postID, userInputs) =>
+      dispatch(handlePostEdit(postID, userInputs))
   };
 };
 
