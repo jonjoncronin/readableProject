@@ -2,6 +2,8 @@ import * as PostsAPI from "../utils/PostsAPI";
 import uuidv1 from "uuid";
 import sortBy from "sort-by";
 
+let descending = true;
+
 export function posts(state = [], action) {
   switch (action.type) {
     case "RECEIVE_POSTS": {
@@ -10,7 +12,13 @@ export function posts(state = [], action) {
 
     case "SORT_POSTS": {
       let newPosts = [...state];
-      newPosts.sort(sortBy(action.sortType));
+      let direction = '';
+      if(descending) {
+        direction = '-'
+      }
+      let sortString = direction + action.sortType;
+      newPosts.sort(sortBy(sortString));
+      descending = !descending;
       return newPosts;
     }
 
