@@ -33,7 +33,7 @@ class PostEdit extends Component {
     });
 
     if (this.state.editSubmitted === true) {
-      return <Redirect to="/" />;
+      return <Redirect to={`/${post.category}/${postID}`} />;
     }
 
     return (
