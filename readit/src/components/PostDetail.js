@@ -33,7 +33,12 @@ class PostDetail extends Component {
             </div>
           </div>
         ) : (
-          <div className="w3-card-2 w3-black">No post found</div>
+          <div className="w3-card hero-image">
+            <div className="hero-text">
+              <h3>We looked... kinda</h3>
+              <p>Sorry we could not find the page you were looking for.</p>
+            </div>
+          </div>
         )}
       </div>
     );

@@ -2,3 +2,16 @@
   margin: auto;
   max-width: 900px;
 }
+
+.hero-image {
+  background-image: url("/media/dog-2532610_1920.jpg");
+  height: 600px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.hero-text {
+    text-align: center;
+    color: white;
+}
