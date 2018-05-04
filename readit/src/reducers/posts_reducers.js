@@ -1,10 +1,17 @@
 import * as PostsAPI from "../utils/PostsAPI";
 import uuidv1 from "uuid";
+import sortBy from 'sort-by'
 
 export function posts (state = [], action) {
   switch(action.type) {
     case 'RECEIVE_POSTS': {
       return action.posts;
+    }
+
+    case 'SORT_POSTS': {
+      let newPosts = [...state];
+      newPosts.sort(sortBy(action.sortType));
+      return newPosts;
     }
 
     case 'VOTE_ON_POST': {

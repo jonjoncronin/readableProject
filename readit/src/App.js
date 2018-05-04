@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
-import sortBy from 'sort-by'
 import Header from "./components/Header";
 import ListPosts from "./components/ListPosts";
 import PostListsControl from "./components/PostListsControl";
@@ -36,11 +35,6 @@ class App extends React.Component {
     // PostsAPI.getComment("8tu4bsun805n8un48ve89")
     // .then(comment => console.log(comment))
 
-  sortPosts = type => {
-    let thePosts = this.state.myPosts;
-    thePosts.sort(sortBy(type));
-    this.setState({ myPosts: thePosts });
-  }
     // console.log("App State: ", this.state);
 
   render() {
@@ -54,9 +48,7 @@ class App extends React.Component {
               <div>
                 <Header />
                 <div className="w3-cell-row">
-                  <PostListsControl
-                    onSortPosts={this.sortPosts}
-                  />
+                  <PostListsControl />
                   <h4>All Posts</h4>
                 </div>
                 <div className="w3-cell-row">
@@ -114,10 +106,7 @@ class App extends React.Component {
               <div>
                 <Header />
                 <div className="w3-cell-row">
-                  <PostListsControl
-                    onSelectMenu={this.selectMenu}
-                    onSortPosts={this.sortPosts}
-                  />
+                  <PostListsControl />
                   <h4>{match.params.category} Posts</h4>
                 </div>
                 <div className="w3-cell-row">

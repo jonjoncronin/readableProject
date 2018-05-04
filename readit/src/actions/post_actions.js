@@ -52,3 +52,13 @@ export const addPost = (userInputs) => ({
 export const handlePostAdd = (userInputs) => dispatch => {
   dispatch(addPost(userInputs));
 };
+
+export const SORT_POSTS = 'SORT_POSTS';
+export const sortPosts = (sortType) => ({
+  type: 'SORT_POSTS',
+  sortType
+});
+
+export const handlePostsSort = (sortType) => dispatch => {
+  dispatch(sortPosts(sortType));
+};
