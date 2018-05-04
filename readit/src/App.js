@@ -1,10 +1,7 @@
 import React from "react";
 import "./App.css";
-import uuidv1 from "uuid";
 import { Route, Switch } from "react-router-dom";
 import sortBy from 'sort-by'
-
-import * as PostsAPI from "./utils/PostsAPI";
 import Header from "./components/Header";
 import ListPosts from "./components/ListPosts";
 import PostListsControl from "./components/PostListsControl";
@@ -38,21 +35,6 @@ class App extends React.Component {
     //
     // PostsAPI.getComment("8tu4bsun805n8un48ve89")
     // .then(comment => console.log(comment))
-
-  addUserPost = userInputs => {
-    let { title, author, category, body } = userInputs;
-    let id = uuidv1();
-    let timestamp = Date.now();
-    let newPost = { id, timestamp, title, body, author, category };
-    console.log("newPost before sent to DB");
-    console.log(newPost);
-    PostsAPI.addPost(newPost).then(() => {
-      console.log("post added to backend DB");
-      PostsAPI.getAllPosts().then(posts => {
-        this.setState({ myPosts: posts });
-      });
-    });
-  };
 
   sortPosts = type => {
     let thePosts = this.state.myPosts;
@@ -91,12 +73,7 @@ class App extends React.Component {
               <div>
                 <Header />
                 <div className="w3-cell-row">
-                  <PostInput
-                    onAddPost={post => {
-                      this.addUserPost(post);
-                      history.push("/");
-                    }}
-                  />
+                  <PostInput />
                 </div>
               </div>
             )}

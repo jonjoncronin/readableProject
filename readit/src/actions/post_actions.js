@@ -42,3 +42,13 @@ export const editPost = (postID, userInputs) => ({
 export const handlePostEdit = (postID, userInputs) => dispatch => {
   dispatch(editPost(postID, userInputs));
 };
+
+export const ADD_POST = 'ADD_POST';
+export const addPost = (userInputs) => ({
+  type: 'ADD_POST',
+  userInputs
+});
+
+export const handlePostAdd = (userInputs) => dispatch => {
+  dispatch(addPost(userInputs));
+};

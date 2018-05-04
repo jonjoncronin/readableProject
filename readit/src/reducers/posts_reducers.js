@@ -1,4 +1,5 @@
 import * as PostsAPI from "../utils/PostsAPI";
+import uuidv1 from "uuid";
 
 export function posts (state = [], action) {
   switch(action.type) {
@@ -31,6 +32,27 @@ export function posts (state = [], action) {
       }
     }
 
+    case 'ADD_POST': {
+      let newPosts = [...state];
+      let { title, author, category, body } = action.userInputs;
+      let post = {
+        id: uuidv1(),
+        timestamp: Date.now(),
+        title: title,
+        body: body,
+        author: author,
+        category: category,
+        voteScore: 1,
+        deleted: false,
+        commentCount: 0
+      };
+
+      newPosts.push(post);
+      // Update the backend DB while you're at it.
+      PostsAPI.addPost(post);
+      return newPosts;
+    }
+
     case 'DELETE_POST': {
       let newPosts = state.filter(entry => {
         return entry.id !== action.postID;
@@ -56,7 +78,7 @@ export function posts (state = [], action) {
         return state;
       }
     }
-    
+
     default:
       return state;
   }

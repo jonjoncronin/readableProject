@@ -1,23 +1,34 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import serializeForm from 'form-serialize'
 import { connect } from 'react-redux';
+import { handlePostAdd } from '../actions/post_actions';
 
 class PostInput extends Component {
+  state = {
+    addSubmitted: false
+  }
+
   handleSubmit = (event) => {
     event.preventDefault();
-    const onAddPost = this.props.onAddPost;
+    const { handlePostAdd } = this.props
     const userInputs = serializeForm(event.target, { hash:true });
-    console.log("submittingAdd");
-    console.log(userInputs);
-    if(onAddPost) {
-      onAddPost(userInputs);
+    if(handlePostAdd) {
+      handlePostAdd(userInputs);
+      this.setState(() => ({
+        addSubmitted: true
+      }));
     }
   }
 
   render() {
     console.log('PostInput Props', this.props);
     const { categories } = this.props;
+
+    if(this.state.addSubmitted === true) {
+      return <Redirect to='/' />
+    }
+
     return (
       <div className="w3-card-4 w3-win8-mauve w3-padding">
 
@@ -79,4 +90,10 @@ const mapStateToProps = (state) => {
   return {categories: state.categories};
 };
 
-export default connect(mapStateToProps)(PostInput);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handlePostAdd: (userInputs) => dispatch(handlePostAdd(userInputs)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostInput);
