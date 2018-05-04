@@ -24,13 +24,13 @@ class PostDetail extends Component {
                 {post.voteScore}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </div>
             </div>
+            <PostControl post={post} />
             <div className="w3-container w3-padding w3-light-grey">
               <div className="w3-container">
                 <label>Post:</label>
                 <div>{post.body}</div>
               </div>
             </div>
-            <PostControl post={post} />
           </div>
         ) : (
           <div className="w3-card-2 w3-black">No post found</div>
