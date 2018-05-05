@@ -58,7 +58,8 @@ export function posts(state = [], action) {
         category: category,
         voteScore: 1,
         deleted: false,
-        commentCount: 0
+        commentCount: 0,
+        comments: []
       };
 
       newPosts.push(post);
