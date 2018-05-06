@@ -24,6 +24,7 @@ export const fetchPosts = () => dispatch => {
   });
   return res;
 }
+
 export const VOTE_ON_POST = "VOTE_ON_POST";
 export const voteOnPost = (postID, vote) => ({
   type: "VOTE_ON_POST",
@@ -74,4 +75,16 @@ export const sortPosts = sortType => ({
 
 export const handlePostsSort = sortType => dispatch => {
   dispatch(sortPosts(sortType));
+};
+
+export const VOTE_ON_COMMENT = "VOTE_ON_COMMENT";
+export const voteOnComment = (postID, commentID, vote) => ({
+  type: "VOTE_ON_COMMENT",
+  postID,
+  commentID,
+  vote
+});
+
+export const handleVoteOnComment = (postID, commentID, vote) => dispatch => {
+  dispatch(voteOnComment(postID, commentID, vote));
 };

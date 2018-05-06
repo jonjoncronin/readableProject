@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { handleVoteOnComment } from "../actions/post_actions";
 
 class ListComments extends Component {
   render() {
     console.log("ListComments Props", this.props);
-    const { comments } = this.props;
+    const { comments, handleVoteOnComment } = this.props;
     return (
       <div>
         <div>
@@ -41,20 +43,24 @@ class ListComments extends Component {
                 {comment.body}
               </div>
               <div className="w3-container w3-win8-taupe">
-                <button
-                  id="upVote"
-                  className="w3-button"
-
-                >
-                  upVote
-                </button>
-                <button
-                  id="downVote"
-                  className="w3-button"
-
-                >
-                  downVote
-                </button>
+              <button
+                id="upVote"
+                className="w3-button"
+                onClick={event => {
+                  handleVoteOnComment(comment.parentId, comment.id, event.target.id);
+                }}
+              >
+                upVote
+              </button>
+              <button
+                id="downVote"
+                className="w3-button"
+                onClick={event => {
+                  handleVoteOnComment(comment.parentId, comment.id, event.target.id);
+                }}
+              >
+                downVote
+              </button>
                 <button
                   className="w3-button"
                 >
@@ -76,5 +82,10 @@ class ListComments extends Component {
     );
   }
 }
+const mapDispatchToProps = dispatch => {
+  return {
+    handleVoteOnComment: (postID, commentID, vote) => dispatch(handleVoteOnComment(postID, commentID, vote))
+  };
+};
 
-export default ListComments;
+export default connect(null, mapDispatchToProps)(ListComments);

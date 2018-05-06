@@ -97,6 +97,42 @@ export function posts(state = [], action) {
       }
     }
 
+    case "VOTE_ON_COMMENT": {
+      console.log("CommentVote Actions: ", action);
+
+      let newPosts = JSON.parse(JSON.stringify(state));
+      // at this point everything is cloned including the comments array.
+      let postToEdit = newPosts.find(post => {
+        return post.id === action.postID;
+      });
+
+      if (postToEdit) {
+        let commentToEdit = postToEdit.comments.find(comment => {
+          return comment.id === action.commentID;
+        });
+
+        if (commentToEdit) {
+          switch (action.vote) {
+            case "upVote":
+              commentToEdit.voteScore++;
+              break;
+            case "downVote":
+              commentToEdit.voteScore--;
+              break;
+            default:
+              return state;
+          }
+
+          // Update the backend DB while you're at it.
+          return newPosts;
+        }
+        else {
+          return state;
+        }
+      }
+      return state;
+    }
+
     default:
       return state;
   }
