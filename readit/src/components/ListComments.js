@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { handleVoteOnComment } from "../actions/post_actions";
+import { handleVoteOnComment, handleCommentDelete } from "../actions/post_actions";
 
 class ListComments extends Component {
   render() {
     console.log("ListComments Props", this.props);
-    const { comments, handleVoteOnComment } = this.props;
+    const { comments, handleVoteOnComment, handleCommentDelete } = this.props;
     return (
       <div>
         <div>
@@ -69,14 +69,17 @@ class ListComments extends Component {
                 <button
                   id="deletePost"
                   className="w3-button"
-
+                  onClick={event => {
+                    console.log("handle deleting of comment");
+                    handleCommentDelete(comment.parentId, comment.id);
+                  }}
                 >
                   delete
                 </button>
               </div>
             </div>)
         ) : (
-          <div>No posts yet for this category</div>
+          <div></div>
         )}
       </div>
     );
@@ -84,7 +87,8 @@ class ListComments extends Component {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    handleVoteOnComment: (postID, commentID, vote) => dispatch(handleVoteOnComment(postID, commentID, vote))
+    handleVoteOnComment: (postID, commentID, vote) => dispatch(handleVoteOnComment(postID, commentID, vote)),
+    handleCommentDelete: (postID, commentID) => dispatch(handleCommentDelete(postID, commentID))
   };
 };
 

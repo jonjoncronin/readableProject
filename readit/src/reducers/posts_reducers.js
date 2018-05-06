@@ -124,6 +124,7 @@ export function posts(state = [], action) {
           }
 
           // Update the backend DB while you're at it.
+          PostsAPI.voteOnComment(action.commentID, action.vote);
           return newPosts;
         }
         else {
@@ -131,6 +132,28 @@ export function posts(state = [], action) {
         }
       }
       return state;
+    }
+
+    case "DELETE_COMMENT": {
+      console.log("CommentDelete Actions: ", action);
+
+      let newPosts = JSON.parse(JSON.stringify(state));
+      // at this point everything is cloned including the comments array.
+      let postToEdit = newPosts.find(post => {
+        return post.id === action.postID;
+      });
+
+      if (postToEdit) {
+        postToEdit.comments = postToEdit.comments.filter(entry => {
+          return entry.id !== action.commentID;
+        });
+        // Update the backend DB while you're at it.
+        PostsAPI.deleteComment(action.commentID);
+        return newPosts;
+      }
+      else {
+        return state;
+      }
     }
 
     default:

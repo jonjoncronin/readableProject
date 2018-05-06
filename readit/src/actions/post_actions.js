@@ -88,3 +88,14 @@ export const voteOnComment = (postID, commentID, vote) => ({
 export const handleVoteOnComment = (postID, commentID, vote) => dispatch => {
   dispatch(voteOnComment(postID, commentID, vote));
 };
+
+export const DELETE_COMMENT = "DELETE_COMMENT";
+export const deleteComment = (postID, commentID) => ({
+  type: "DELETE_COMMENT",
+  postID,
+  commentID
+});
+
+export const handleCommentDelete = (postID, commentID) => dispatch => {
+  dispatch(deleteComment(postID, commentID));
+};

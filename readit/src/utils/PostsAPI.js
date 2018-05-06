@@ -187,7 +187,7 @@ export const voteOnPost = (postID, voteOption) => {
  * the comment object for the comment being voted on
  */
 export const voteOnComment = (commentID, voteOption) => {
-  fetch(`${restURL}/comments/${commentID}`, {
+  let fetchPromise = fetch(`${restURL}/comments/${commentID}`, {
     method: "POST",
     headers: {
       ...headers,
@@ -195,6 +195,7 @@ export const voteOnComment = (commentID, voteOption) => {
     },
     body: JSON.stringify({ option: voteOption })
   }).then(res => res.json());
+  return fetchPromise;
 };
 
 /**
@@ -265,11 +266,12 @@ export const deletePost = postID => {
  * the comment object for the comment being "deleted"
  */
 export const deleteComment = commentID => {
-  fetch(`${restURL}/comments/${commentID}`, {
+  let fetchPromise = fetch(`${restURL}/comments/${commentID}`, {
     method: "DELETE",
     headers: {
       ...headers,
       "Content-Type": "application/json"
     }
   }).then(res => res.json());
+  return fetchPromise;
 };
