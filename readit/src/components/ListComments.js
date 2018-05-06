@@ -14,14 +14,14 @@ class ListComments extends Component {
             <label>Author</label>
             <input
               name="author"
-              className="w3-input"
+              className="w3-input w3-light-gray w3-hover-white"
               type="text"
               placeholder="Your name..."
             />
             <label>Comment</label>
             <textarea
               name="comment"
-              className="w3-input"
+              className="w3-input w3-light-gray w3-hover-white"
               placeholder="Your comment..."
             />
             <button className="w3-button">Submit</button>
@@ -40,7 +40,24 @@ class ListComments extends Component {
                 <div className="w3-small w3-border-bottom">
                   Author: {comment.author}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Votes: {comment.voteScore}
                 </div>
-                {comment.body}
+                <div className="w3-show">
+                  {comment.body}
+                </div>
+                <div className="w3-light-blue w3-hide">
+                  <textarea
+                    name="comment"
+                    className="w3-input w3-light-grey w3-hover-white"
+                    placeholder={comment ? comment.body : ""}
+                    defaultValue={comment ? comment.body : ""}
+                  />
+                  <button
+                    id="submitEdit"
+                    className="w3-button"
+                  >
+                    Save
+                  </button>
+                  <button className="w3-button w3-right">Cancel</button>
+                </div>
               </div>
               <div className="w3-container w3-win8-taupe">
               <button
