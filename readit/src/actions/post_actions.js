@@ -99,3 +99,15 @@ export const deleteComment = (postID, commentID) => ({
 export const handleCommentDelete = (postID, commentID) => dispatch => {
   dispatch(deleteComment(postID, commentID));
 };
+
+export const EDIT_COMMENT = "EDIT_COMMENT";
+export const editComment = (postID, commentID, userInputs) => ({
+  type: "EDIT_COMMENT",
+  postID,
+  commentID,
+  userInputs
+});
+
+export const handleCommentEdit = (postID, commentID, userInputs) => dispatch => {
+  dispatch(editComment(postID, commentID, userInputs));
+};

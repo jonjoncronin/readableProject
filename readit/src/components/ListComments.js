@@ -1,11 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { handleVoteOnComment, handleCommentDelete } from "../actions/post_actions";
+import { handleVoteOnComment,
+         handleCommentDelete,
+         handleCommentEdit } from "../actions/post_actions";
+import serializeForm from "form-serialize";
 
 class ListComments extends Component {
+
+  handleEditSubmit = (postID, commentID, event) => {
+    event.preventDefault();
+    const { handleCommentEdit } = this.props;
+    const userInputs = serializeForm(event.target, { hash: true });
+    if (handleCommentEdit) {
+      console.log("Submit comment Edit: ", userInputs);
+      console.log("Comment to be editted: ", commentID);
+      handleCommentEdit(postID, commentID, userInputs);
+    }
+  };
+
   render() {
     console.log("ListComments Props", this.props);
-    const { comments, handleVoteOnComment, handleCommentDelete } = this.props;
+    const { comments, handleVoteOnComment, handleCommentDelete, handleCommentEdit } = this.props;
     return (
       <div>
         <div>
@@ -40,24 +55,28 @@ class ListComments extends Component {
                 <div className="w3-small w3-border-bottom">
                   Author: {comment.author}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Votes: {comment.voteScore}
                 </div>
-                <div className="w3-show">
+                <div className="w3-hide">
                   {comment.body}
                 </div>
-                <div className="w3-light-blue w3-hide">
-                  <textarea
-                    name="comment"
-                    className="w3-input w3-light-grey w3-hover-white"
-                    placeholder={comment ? comment.body : ""}
-                    defaultValue={comment ? comment.body : ""}
-                  />
-                  <button
-                    id="submitEdit"
-                    className="w3-button"
-                  >
-                    Save
-                  </button>
-                  <button className="w3-button w3-right">Cancel</button>
-                </div>
+                <form onSubmit={event => {
+                  this.handleEditSubmit(comment.parentId, comment.id,event)}}
+                >
+                  <div className="w3-light-blue w3-show">
+                    <textarea
+                      name="comment"
+                      className="w3-input w3-light-grey w3-hover-white"
+                      placeholder={comment ? comment.body : ""}
+                      defaultValue={comment ? comment.body : ""}
+                    />
+                    <button
+                      id="submitEdit"
+                      className="w3-button"
+                    >
+                      Save
+                    </button>
+                    <button id="editCancel" className="w3-button w3-right">Cancel</button>
+                  </div>
+                </form>
               </div>
               <div className="w3-container w3-win8-taupe">
               <button
@@ -105,7 +124,8 @@ class ListComments extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     handleVoteOnComment: (postID, commentID, vote) => dispatch(handleVoteOnComment(postID, commentID, vote)),
-    handleCommentDelete: (postID, commentID) => dispatch(handleCommentDelete(postID, commentID))
+    handleCommentDelete: (postID, commentID) => dispatch(handleCommentDelete(postID, commentID)),
+    handleCommentEdit: (postID, commentID, userInputs) => dispatch(handleCommentEdit(postID, commentID, userInputs))
   };
 };
 
