@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Accordion from "./Accordion";
+import CommentInput from "./CommentInput";
 import { connect } from "react-redux";
 import { handleVoteOnComment,
          handleCommentDelete,
@@ -24,26 +26,10 @@ class ListComments extends Component {
     return (
       <div>
         <div>
-          <button className="w3-button w3-block">Write a comment ...</button>
-          <div className="w3-card w3-white w3-padding" style={{marginBottom:'8px'}}>
-            <label>Author</label>
-            <input
-              name="author"
-              className="w3-input w3-light-gray w3-hover-white"
-              type="text"
-              placeholder="Your name..."
-            />
-            <label>Comment</label>
-            <textarea
-              name="comment"
-              className="w3-input w3-light-gray w3-hover-white"
-              placeholder="Your comment..."
-            />
-            <button className="w3-button">Submit</button>
-            <button className="w3-button w3-right">
-              Cancel
-            </button>
-          </div>
+          <Accordion
+            title="Write a comment ..."
+            content={<CommentInput />}
+          />
         </div>
         {comments.length !== 0 ? (
           comments.map(comment =>
