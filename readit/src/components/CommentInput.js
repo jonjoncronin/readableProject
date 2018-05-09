@@ -5,7 +5,7 @@ class CommentInput extends Component {
     console.log("CommentInput Props", this.props);
 
     return (
-      <div className="w3-card w3-white w3-padding" style={{marginBottom:'8px'}}>
+      <div className="w3-card w3-white w3-padding">
         <label>Author</label>
         <input
           name="author"

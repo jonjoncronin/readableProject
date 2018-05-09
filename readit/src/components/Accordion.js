@@ -13,7 +13,7 @@ class Accordion extends Component {
     const { title, content } = this.props;
 
     return (
-      <div>
+      <div style={{marginBottom:'8px'}}>
         <div className="w3-button w3-block" onClick={() => this.handleButtonClick()}>
           {title}
         </div>
