@@ -20,9 +20,6 @@ class CommentInput extends Component {
           placeholder="Your comment..."
         />
         <button className="w3-button">Submit</button>
-        <button className="w3-button w3-right">
-          Cancel
-        </button>
       </div>
     );
   }
