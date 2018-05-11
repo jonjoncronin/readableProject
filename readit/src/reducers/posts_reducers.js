@@ -187,6 +187,39 @@ export function posts(state = [], action) {
       }
     }
 
+    case "ADD_COMMENT": {
+      console.log("CommentAdd Actions: ", action);
+
+      let newPosts = JSON.parse(JSON.stringify(state));
+      // at this point everything is cloned including the comments array.
+      let postToEdit = newPosts.find(post => {
+        return post.id === action.postID;
+      });
+
+      if (postToEdit) {
+        let { author, comment } = action.userInputs;
+        let someId = uuidv1();
+        let newComment = {
+          id: someId,
+          parentId: action.postID,
+          timestamp: Date.now(),
+          body: comment,
+          author: author,
+          voteScore: 0,
+          deleted: false,
+          parentDeleted: false
+        };
+
+        postToEdit.comments.push(newComment);
+        // Update the backend DB while you're at it.
+        PostsAPI.addCommentToPost(newComment);
+        return newPosts;
+      }
+      else {
+        return state;
+      }
+    }
+
     default:
       return state;
   }

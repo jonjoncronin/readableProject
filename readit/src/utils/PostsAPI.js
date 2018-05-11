@@ -1,4 +1,3 @@
-import uuidv1 from "uuid";
 const restURL = "http://localhost:3001";
 
 // Generate a unique token for accessing data on the backend server.
@@ -146,17 +145,16 @@ export const addPost = newPost => {
  * @param {[type]} author
  * @param {[type]} parentId uuid of the parent post
  */
-export const addCommentToPost = (body, author, parentId) => {
-  let id = uuidv1();
-  let timestamp = Date.now();
-  fetch(`${restURL}/comments`, {
+export const addCommentToPost = newComment => {
+  let fetchPromise = fetch(`${restURL}/comments`, {
     method: "POST",
     headers: {
       ...headers,
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ id, timestamp, body, author, parentId })
+    body: JSON.stringify(newComment)
   }).then(res => res.json());
+  return fetchPromise;
 };
 
 /**

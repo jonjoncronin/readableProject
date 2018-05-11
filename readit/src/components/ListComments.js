@@ -6,33 +6,36 @@ import { handleVoteOnComment,
          handleCommentDelete,
          handleCommentEdit } from "../actions/post_actions";
 import serializeForm from "form-serialize";
+import sortBy from "sort-by";
 
 class ListComments extends Component {
 
-  handleEditSubmit = (postID, commentID, event) => {
+  handleEditSubmit = ( commentID, event) => {
     event.preventDefault();
-    const { handleCommentEdit } = this.props;
+    const { handleCommentEdit, post } = this.props;
     const userInputs = serializeForm(event.target, { hash: true });
     if (handleCommentEdit) {
       console.log("Submit comment Edit: ", userInputs);
       console.log("Comment to be editted: ", commentID);
-      handleCommentEdit(postID, commentID, userInputs);
+      handleCommentEdit(post.id, commentID, userInputs);
     }
   };
 
   render() {
     console.log("ListComments Props", this.props);
-    const { comments, handleVoteOnComment, handleCommentDelete, handleCommentEdit } = this.props;
+    const { post, comments, handleVoteOnComment, handleCommentDelete, handleCommentEdit } = this.props;
+    let commentsToDisplay = comments.sort(sortBy("timestamp"));
+
     return (
       <div>
         <div>
           <Accordion
             title="Write a comment ..."
-            content={<CommentInput />}
+            content={<CommentInput post={post}/>}
           />
         </div>
-        {comments.length !== 0 ? (
-          comments.map(comment =>
+        {commentsToDisplay.length !== 0 ? (
+          commentsToDisplay.map(comment =>
             <div key={comment.id} className="w3-card-4 w3-white" style={{marginBottom:'8px'}}>
               <div className="w3-container w3-padding">
                 <div className="w3-small">
@@ -45,7 +48,7 @@ class ListComments extends Component {
                   {comment.body}
                 </div>
                 <form onSubmit={event => {
-                  this.handleEditSubmit(comment.parentId, comment.id,event)}}
+                  this.handleEditSubmit(comment.id,event)}}
                 >
                   <div className="w3-light-blue w3-show">
                     <textarea
@@ -69,7 +72,7 @@ class ListComments extends Component {
                 id="upVote"
                 className="w3-button"
                 onClick={event => {
-                  handleVoteOnComment(comment.parentId, comment.id, event.target.id);
+                  handleVoteOnComment(post.id, comment.id, event.target.id);
                 }}
               >
                 upVote
@@ -78,7 +81,7 @@ class ListComments extends Component {
                 id="downVote"
                 className="w3-button"
                 onClick={event => {
-                  handleVoteOnComment(comment.parentId, comment.id, event.target.id);
+                  handleVoteOnComment(post.id, comment.id, event.target.id);
                 }}
               >
                 downVote
@@ -93,7 +96,7 @@ class ListComments extends Component {
                   className="w3-button"
                   onClick={event => {
                     console.log("handle deleting of comment");
-                    handleCommentDelete(comment.parentId, comment.id);
+                    handleCommentDelete(post.id, comment.id);
                   }}
                 >
                   delete

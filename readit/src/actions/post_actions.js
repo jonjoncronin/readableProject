@@ -111,3 +111,14 @@ export const editComment = (postID, commentID, userInputs) => ({
 export const handleCommentEdit = (postID, commentID, userInputs) => dispatch => {
   dispatch(editComment(postID, commentID, userInputs));
 };
+
+export const ADD_COMMENT = "ADD_COMMENT";
+export const addComment = (postID, userInputs) => ({
+  type: "ADD_COMMENT",
+  postID,
+  userInputs
+});
+
+export const handleCommentAdd = (postID, userInputs) => dispatch => {
+  dispatch(addComment(postID, userInputs));
+};

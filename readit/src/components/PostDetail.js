@@ -29,7 +29,7 @@ class PostDetail extends Component {
                 </div>
                 {post.body}
               </div>
-              <ListComments comments={post.comments} />
+              <ListComments post={post} comments={post.comments} />
             </div>
           </div>
         ) : (
