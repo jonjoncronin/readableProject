@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Accordion from "./Accordion";
 import CommentInput from "./CommentInput";
 import { connect } from "react-redux";
 import { handleVoteOnComment,
@@ -9,6 +8,13 @@ import serializeForm from "form-serialize";
 import sortBy from "sort-by";
 
 class ListComments extends Component {
+  state = {
+    editting: false,
+  };
+
+  handleEditButtonClick = () => {
+    this.setState({editting: !this.state.editting});
+  };
 
   handleEditSubmit = ( commentID, event) => {
     event.preventDefault();
@@ -18,6 +24,7 @@ class ListComments extends Component {
       console.log("Submit comment Edit: ", userInputs);
       console.log("Comment to be editted: ", commentID);
       handleCommentEdit(post.id, commentID, userInputs);
+      this.setState({editting: false});
     }
   };
 
@@ -28,12 +35,7 @@ class ListComments extends Component {
 
     return (
       <div>
-        <div>
-          <Accordion
-            title="Write a comment ..."
-            content={<CommentInput post={post}/>}
-          />
-        </div>
+        <CommentInput post={post} />
         {commentsToDisplay.length !== 0 ? (
           commentsToDisplay.map(comment =>
             <div key={comment.id} className="w3-card-4 w3-white" style={{marginBottom:'8px'}}>
@@ -44,10 +46,10 @@ class ListComments extends Component {
                 <div className="w3-small w3-border-bottom">
                   Author: {comment.author}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Votes: {comment.voteScore}
                 </div>
-                <div className="w3-hide">
+                <div className={!this.state.editting ? "w3-show": "w3-hide"}>
                   {comment.body}
                 </div>
-                <form onSubmit={event => {
+                <form className={this.state.editting ? "w3-show": "w3-hide"} onSubmit={event => {
                   this.handleEditSubmit(comment.id,event)}}
                 >
                   <div className="w3-light-blue w3-show">
@@ -63,7 +65,7 @@ class ListComments extends Component {
                     >
                       Save
                     </button>
-                    <button id="editCancel" className="w3-button w3-right">Cancel</button>
+                    <button id="editCancel" className="w3-button w3-right" onClick={() => this.handleEditButtonClick()}>Cancel</button>
                   </div>
                 </form>
               </div>
@@ -88,6 +90,7 @@ class ListComments extends Component {
               </button>
                 <button
                   className="w3-button"
+                  onClick={() => this.handleEditButtonClick()}
                 >
                   edit
                 </button>
