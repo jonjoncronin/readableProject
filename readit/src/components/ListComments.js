@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import CommentInput from "./CommentInput";
 import CommentDetail from "./CommentDetail";
-import serializeForm from "form-serialize";
 import sortBy from "sort-by";
 
 class ListComments extends Component {

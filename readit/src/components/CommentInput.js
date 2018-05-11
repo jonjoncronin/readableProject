@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import { handleCommentAdd } from "../actions/post_actions";
 import serializeForm from "form-serialize";
 import { connect } from "react-redux";
@@ -24,7 +23,6 @@ class CommentInput extends Component {
 
   render() {
     console.log("CommentInput Props", this.props);
-    const { post } = this.props;
 
     return (
       <div style={{marginBottom:'8px'}}>

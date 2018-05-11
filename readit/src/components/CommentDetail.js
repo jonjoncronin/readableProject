@@ -34,8 +34,7 @@ class CommentDetail extends Component {
       post,
       comment,
       handleVoteOnComment,
-      handleCommentDelete,
-      handleCommentEdit
+      handleCommentDelete
     } = this.props;
 
     return (
