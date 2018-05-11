@@ -7,23 +7,19 @@ export const receivePosts = posts => ({
 });
 
 export const fetchPosts = () => dispatch => {
-  let res = PostsAPI.getAllPosts()
-  .then((posts) => {
+  let res = PostsAPI.getAllPosts().then(posts => {
     let promises = [];
-    posts.forEach((post) => {
+    posts.forEach(post => {
       promises.push(
-        PostsAPI.getCommentsForPost(post.id)
-        .then((comments) => {
+        PostsAPI.getCommentsForPost(post.id).then(comments => {
           post.comments = comments;
         })
       );
     });
-    Promise.all(promises).then(() =>
-      dispatch(receivePosts(posts))
-    );
+    Promise.all(promises).then(() => dispatch(receivePosts(posts)));
   });
   return res;
-}
+};
 
 export const VOTE_ON_POST = "VOTE_ON_POST";
 export const voteOnPost = (postID, vote) => ({
@@ -108,7 +104,11 @@ export const editComment = (postID, commentID, userInputs) => ({
   userInputs
 });
 
-export const handleCommentEdit = (postID, commentID, userInputs) => dispatch => {
+export const handleCommentEdit = (
+  postID,
+  commentID,
+  userInputs
+) => dispatch => {
   dispatch(editComment(postID, commentID, userInputs));
 };
 

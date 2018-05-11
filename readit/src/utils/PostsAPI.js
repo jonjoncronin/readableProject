@@ -38,10 +38,11 @@ export const getAllCategories = () =>
  * }
  */
 export const getAllPosts = () => {
-  let fetchPromise = fetch(`${restURL}/posts`, { headers })
-    .then(res => res.json());
+  let fetchPromise = fetch(`${restURL}/posts`, { headers }).then(res =>
+    res.json()
+  );
   return fetchPromise;
-}
+};
 /**
  * Call RESTful API to backend server to retrieve posts for a specific category.
  * @param  {String} category
@@ -97,7 +98,7 @@ export const getCommentsForPost = postID => {
   return fetch(`${restURL}/posts/${postID}/comments`, { headers }).then(res =>
     res.json()
   );
-}
+};
 /**
  * Call RESTful API to backend server to retrieve a specific comment
  * @param  {String} commentID uuid of the comment

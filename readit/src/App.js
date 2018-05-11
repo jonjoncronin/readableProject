@@ -9,33 +9,6 @@ import PostDetail from "./components/PostDetail";
 import PostEdit from "./components/PostEdit";
 
 class App extends React.Component {
-  // PostsAPI.editPost("6ni6ok3ym7mf1p33lnez", "My Post", "My body rocks!")
-  //
-  // PostsAPI.editComment("8tu4bsun805n8un48ve89", "My comment body rocks!")
-  //
-  // PostsAPI.voteOnComment("8tu4bsun805n8un48ve89","downVote")
-  //
-  // PostsAPI.deleteComment("8tu4bsun805n8un48ve89")
-  //
-  // PostsAPI.getCommentsForPost("8xf0y6ziyjabvozdd253nd")
-  // .then(comments => console.log(comments))
-  //
-  // PostsAPI.getAllPosts()
-  // .then((posts) => {
-  //   posts.forEach((post) => {
-  //     PostsAPI.getCommentsForPost(post.id)
-  //     .then((comments) => {
-  //       console.log(post.title)
-  //       console.log(comments)
-  //     })
-  //   })
-  // })
-  //
-  // PostsAPI.getComment("8tu4bsun805n8un48ve89")
-  // .then(comment => console.log(comment))
-
-  // console.log("App State: ", this.state);
-
   render() {
     return (
       <div className="app">

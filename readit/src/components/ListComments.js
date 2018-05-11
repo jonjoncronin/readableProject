@@ -13,10 +13,11 @@ class ListComments extends Component {
       <div>
         <CommentInput post={post} />
         {commentsToDisplay.length !== 0 ? (
-          commentsToDisplay.map(comment =>
-            <CommentDetail key={comment.id} post={post} comment={comment} />)
+          commentsToDisplay.map(comment => (
+            <CommentDetail key={comment.id} post={post} comment={comment} />
+          ))
         ) : (
-          <div></div>
+          <div />
         )}
       </div>
     );

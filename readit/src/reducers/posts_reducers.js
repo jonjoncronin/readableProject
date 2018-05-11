@@ -12,9 +12,9 @@ export function posts(state = [], action) {
 
     case "SORT_POSTS": {
       let newPosts = [...state];
-      let direction = '';
-      if(descending) {
-        direction = '-'
+      let direction = "";
+      if (descending) {
+        direction = "-";
       }
       let sortString = direction + action.sortType;
       newPosts.sort(sortBy(sortString));
@@ -126,8 +126,7 @@ export function posts(state = [], action) {
           // Update the backend DB while you're at it.
           PostsAPI.voteOnComment(action.commentID, action.vote);
           return newPosts;
-        }
-        else {
+        } else {
           return state;
         }
       }
@@ -150,8 +149,7 @@ export function posts(state = [], action) {
         // Update the backend DB while you're at it.
         PostsAPI.deleteComment(action.commentID);
         return newPosts;
-      }
-      else {
+      } else {
         return state;
       }
     }
@@ -168,21 +166,16 @@ export function posts(state = [], action) {
       if (postToEdit) {
         let commentToEdit = postToEdit.comments.find(comment => {
           return comment.id === action.commentID;
-        })
+        });
         if (commentToEdit) {
           commentToEdit.body = action.userInputs.comment;
           // Update the backend DB while you're at it.
-          PostsAPI.editComment(
-            action.commentID,
-            action.userInputs.comment
-          );
+          PostsAPI.editComment(action.commentID, action.userInputs.comment);
           return newPosts;
-        }
-        else {
+        } else {
           return state;
         }
-      }
-      else {
+      } else {
         return state;
       }
     }
@@ -214,8 +207,7 @@ export function posts(state = [], action) {
         // Update the backend DB while you're at it.
         PostsAPI.addCommentToPost(newComment);
         return newPosts;
-      }
-      else {
+      } else {
         return state;
       }
     }
