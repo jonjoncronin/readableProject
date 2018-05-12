@@ -299,9 +299,6 @@ registers to have access to the `handleVoteOnComment`, `handleCommentEdit` and
 This component has internal state to help with some UI rendering where the
 edit input fields are hidden until the user clicks the edit button.
 
-## CommentControl - src/components/CommentControl.js
-TBD
-
 # Reducers and Actions
 Following the Redux patterns, application state is maintained in the store with
 reducers updating that state and action creators defining the type of state
