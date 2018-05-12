@@ -386,7 +386,7 @@ Navigate into the `api-server` directory.
 Execute `npm install`  
 Execute `npm start`  
 Open another terminal window or tab.  
-Navigate back to the root of the repo and into the `readable` directory  
+Navigate back to the root of the repo and into the `readit` directory  
 Execute `npm install`  
 Execute `npm start`  
 The application should automatically open a web browser and navigate to
