@@ -9,7 +9,7 @@ class PostDetail extends Component {
     let post = this.props.posts.find(entry => {
       return entry.id === postID;
     });
-    console.log("PostDetails Props ", this.props);
+    // console.log("PostDetails Props ", this.props);
     return (
       <div>
         {post ? (

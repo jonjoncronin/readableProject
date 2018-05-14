@@ -6,7 +6,7 @@ import { handlePostsSort } from "../actions/post_actions";
 
 class PostListsControl extends Component {
   render() {
-    console.log("PostListsControl Props: ", this.props);
+    // console.log("PostListsControl Props: ", this.props);
     const { handlePostsSort } = this.props;
     return (
       <div className="w3-card-4 w3-win8-mauve w3-padding w3-margin-bottom">

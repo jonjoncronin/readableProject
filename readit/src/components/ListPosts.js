@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 class ListPosts extends Component {
   render() {
-    console.log("ListPosts Props", this.props);
+    // console.log("ListPosts Props", this.props);
     const { posts, category } = this.props;
     let postsToView = [];
     if (category) {

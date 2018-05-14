@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 class Menu extends Component {
   render() {
-    console.log("Menu Props: ", this.props);
+    // console.log("Menu Props: ", this.props);
     const { categories } = this.props;
     return (
       <div className="w3-card-4 w3-bar w3-black">

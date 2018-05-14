@@ -11,10 +11,10 @@ class PostEdit extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log("submitting");
+    // console.log("submitting");
     const { postID, handlePostEdit } = this.props;
     const userInputs = serializeForm(event.target, { hash: true });
-    console.log(userInputs);
+    // console.log(userInputs);
     if (handlePostEdit) {
       handlePostEdit(postID, userInputs);
       // return to the root page
@@ -25,7 +25,7 @@ class PostEdit extends Component {
   };
 
   render() {
-    console.log("PostEdit Props", this.props);
+    // console.log("PostEdit Props", this.props);
     const { postID, posts } = this.props;
 
     let post = posts.find(entry => {

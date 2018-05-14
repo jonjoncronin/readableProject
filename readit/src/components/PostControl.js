@@ -5,7 +5,7 @@ import { handleVoteOnPost, handlePostDelete } from "../actions/post_actions";
 
 class PostControl extends Component {
   render() {
-    console.log("PostControl Props", this.props);
+    // console.log("PostControl Props", this.props);
     const { post, handleVoteOnPost, handlePostDelete } = this.props;
     return (
       <div className="w3-container w3-win8-olive">
@@ -37,7 +37,7 @@ class PostControl extends Component {
           id="deletePost"
           className="w3-button"
           onClick={event => {
-            console.log("handle deleting of post");
+            // console.log("handle deleting of post");
             handlePostDelete(post.id);
           }}
         >

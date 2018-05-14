@@ -12,7 +12,7 @@ const store = configureStore();
 
 store.dispatch(fetchCategories()).then(() => {
   store.dispatch(fetchPosts()).then(() => {
-    console.log("Store state:", store.getState());
+    // console.log("Store state:", store.getState());
   });
 });
 

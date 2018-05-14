@@ -21,15 +21,15 @@ class CommentDetail extends Component {
     const { handleCommentEdit, post } = this.props;
     const userInputs = serializeForm(event.target, { hash: true });
     if (handleCommentEdit) {
-      console.log("Submit comment Edit: ", userInputs);
-      console.log("Comment to be editted: ", commentID);
+      // console.log("Submit comment Edit: ", userInputs);
+      // console.log("Comment to be editted: ", commentID);
       handleCommentEdit(post.id, commentID, userInputs);
       this.setState({ editting: false });
     }
   };
 
   render() {
-    console.log("CommentDetail Props", this.props);
+    // console.log("CommentDetail Props", this.props);
     const {
       post,
       comment,
@@ -106,7 +106,7 @@ class CommentDetail extends Component {
               id="deletePost"
               className="w3-button"
               onClick={event => {
-                console.log("handle deleting of comment");
+                // console.log("handle deleting of comment");
                 handleCommentDelete(post.id, comment.id);
               }}
             >

@@ -5,7 +5,7 @@ import sortBy from "sort-by";
 
 class ListComments extends Component {
   render() {
-    console.log("ListComments Props", this.props);
+    // console.log("ListComments Props", this.props);
     const { post } = this.props;
     let commentsToDisplay = post.comments.sort(sortBy("timestamp"));
 

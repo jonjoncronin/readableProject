@@ -98,7 +98,7 @@ export function posts(state = [], action) {
     }
 
     case "VOTE_ON_COMMENT": {
-      console.log("CommentVote Actions: ", action);
+      // console.log("CommentVote Actions: ", action);
 
       let newPosts = JSON.parse(JSON.stringify(state));
       // at this point everything is cloned including the comments array.
@@ -134,7 +134,7 @@ export function posts(state = [], action) {
     }
 
     case "DELETE_COMMENT": {
-      console.log("CommentDelete Actions: ", action);
+      // console.log("CommentDelete Actions: ", action);
 
       let newPosts = JSON.parse(JSON.stringify(state));
       // at this point everything is cloned including the comments array.
@@ -155,7 +155,7 @@ export function posts(state = [], action) {
     }
 
     case "EDIT_COMMENT": {
-      console.log("CommentEdit Actions: ", action);
+      // console.log("CommentEdit Actions: ", action);
 
       let newPosts = JSON.parse(JSON.stringify(state));
       // at this point everything is cloned including the comments array.
@@ -181,7 +181,7 @@ export function posts(state = [], action) {
     }
 
     case "ADD_COMMENT": {
-      console.log("CommentAdd Actions: ", action);
+      // console.log("CommentAdd Actions: ", action);
 
       let newPosts = JSON.parse(JSON.stringify(state));
       // at this point everything is cloned including the comments array.

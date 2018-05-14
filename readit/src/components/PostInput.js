@@ -22,7 +22,7 @@ class PostInput extends Component {
   };
 
   render() {
-    console.log("PostInput Props", this.props);
+    // console.log("PostInput Props", this.props);
     const { categories } = this.props;
 
     if (this.state.addSubmitted === true) {

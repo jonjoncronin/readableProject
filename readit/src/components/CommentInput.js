@@ -22,7 +22,7 @@ class CommentInput extends Component {
   };
 
   render() {
-    console.log("CommentInput Props", this.props);
+    // console.log("CommentInput Props", this.props);
 
     return (
       <div style={{ marginBottom: "8px" }}>
